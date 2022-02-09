@@ -1,0 +1,54 @@
+{
+  "name": "authentica",
+  "version": "1.0.0",
+  "repository": "https://github.com/ineshbose/authentica",
+  "scripts": {
+    "start": "nodemon --exec ts-node server/index.ts",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.6.3",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.0.3",
+    "type-graphql": "^1.1.1",
+    "typeorm": "0.2.41"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/graphql": "^14.5.0",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^8.0.29",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "lint-staged": "^12.3.3",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "ts-node": "3.3.0",
+    "typescript": "3.3.3333",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "server/**/*.{js,ts}": [
+      "eslint server --fix"
+    ]
+  }
+}
