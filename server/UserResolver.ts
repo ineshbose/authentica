@@ -24,10 +24,10 @@ import {
 @ObjectType()
 class LoginResponse {
   @Field()
-  accessToken: string;
+  accessToken!: string;
 
   @Field(() => User)
-  user: User;
+  user!: User;
 }
 
 @Resolver()

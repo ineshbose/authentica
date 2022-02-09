@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/core": "^2.3.0",
     "apollo-server-express": "^3.6.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -55,7 +56,8 @@
     "exec": "ts-node --project tsconfig.server.json server/index.ts",
     "watch": [
       "server"
-    ]
+    ],
+    "ext": "ts"
   },
   "gitHooks": {
     "pre-commit": "npx lint-staged"

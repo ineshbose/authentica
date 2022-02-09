@@ -6,15 +6,15 @@ import { ObjectType, Field, Int } from 'type-graphql';
 export default class User extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Field()
   @Column('text')
-  email: string;
+  email!: string;
 
   @Column('text')
-  password: string;
+  password!: string;
 
   @Column('int', { default: 0 })
-  tokenVersion: number;
+  tokenVersion!: number;
 }

@@ -38,6 +38,52 @@ yarn runserver
 yarn dev
 ```
 
+#### `launch.json` (convenient option)*
+
+```json
+{
+    "configurations": [
+        {
+            "name": "authentica-backend",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "yarn",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "runtimeArgs": [
+                "runserver"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "name": "authentica-frontend",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "yarn",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "runtimeArgs": [
+                "dev"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Authentica",
+            "configurations": [
+                "authentica-backend",
+                "authentica-frontend"
+            ]
+        }
+    ]
+}
+```
+
 ### Dev References
 
 * [`benawad/jwt-auth-example`](https://github.com/benawad/jwt-auth-example)
@@ -46,6 +92,7 @@ yarn dev
 
 * [Express](https://expressjs.com/)
 * [Next.js](https://nextjs.org/)
+* [Geist UI](https://geist-ui.dev/)
 
 ## Team Members
 
