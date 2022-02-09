@@ -26,10 +26,16 @@ npm install --global yarn
 
 ### Running the App
 
-#### Backend Server
+#### Backend
 
 ```sh
-yarn start
+yarn runserver
+```
+
+#### Frontend
+
+```sh
+yarn dev
 ```
 
 ### Dev References
@@ -39,6 +45,7 @@ yarn start
 ## Developed With
 
 * [Express](https://expressjs.com/)
+* [Next.js](https://nextjs.org/)
 
 ## Team Members
 
