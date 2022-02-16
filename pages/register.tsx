@@ -1,14 +1,24 @@
+import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-const Index: NextPage = () => {
+const Register: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h3 className={styles.title}>Authentica</h3>
+        <Spacer h={1}></Spacer>
+        <Input
+          placeholder="Email"
+          style={{ height: '160px', width: '200px' }}
+        />{' '}
+        <Spacer h={1} />
+        <Input.Password placeholder="Password" /> <Spacer h={1} />
+        <Input.Password placeholder="Confirm Password" /> <Spacer h={1} />
+        <Button auto type="success">
+          Submit
+        </Button>
       </main>
 
       <footer className={styles.footer}>
@@ -27,4 +37,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default Register;

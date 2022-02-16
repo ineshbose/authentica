@@ -91,6 +91,11 @@
   dependencies:
     "@babel/runtime" "^7.16.7"
 
+"@geist-ui/icons@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@geist-ui/icons/-/icons-1.0.1.tgz#588b22960f584cbb75674ed56ea0789ac62dfbd6"
+  integrity sha512-W+ol1DOk9MNjY9IV0gKbhaKIjif6O+5wxM31CIUUAl6shjRjmwVPxVNFoaVJwiTp0Chp5BQyluHmCWaOOZQCtA==
+
 "@graphql-tools/merge@^8.2.1":
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.2.2.tgz#433566c662a33f5a9c3cc5f3ce3753fb0019477a"

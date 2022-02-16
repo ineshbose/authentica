@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@geist-ui/core": "^2.3.0",
+    "@geist-ui/icons": "^1.0.1",
     "apollo-server-express": "^3.6.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -64,10 +65,10 @@
   },
   "lint-staged": {
     "server/**/*.{js,ts}": [
-      "eslint server --fix"
+      "yarn eslint server --fix"
     ],
     "**/*.{js,ts,jsx,tsx}": [
-      "eslint . --fix"
+      "yarn eslint . --fix"
     ]
   }
 }
