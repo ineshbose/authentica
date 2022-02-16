@@ -9,10 +9,10 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h3 className={styles.title}>Authentica</h3>
-        <Spacer h={1}></Spacer>
+        <Spacer h={2}></Spacer>
 
         <Grid.Container gap={2} justify="center" height="100px">
-          <Grid xs={6}>
+          <Grid xs={4}>
             <Card shadow width="200px" height="250px">
               <Key
                 size={100}
