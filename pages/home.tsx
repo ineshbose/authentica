@@ -1,4 +1,4 @@
-import { Button, Card, Spacer } from '@geist-ui/core';
+import { Button, Card, Grid, Spacer } from '@geist-ui/core';
 import { FilePlus, Key, Plus } from '@geist-ui/icons';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -11,21 +11,26 @@ const Home: NextPage = () => {
         <h3 className={styles.title}>Authentica</h3>
         <Spacer h={1}></Spacer>
 
-        <Card shadow width="200px" height="200px">
-          <Key size={100} style={{ textAlign: 'center' }} />
-          <Spacer h={1}></Spacer>
-          <Button icon={<Plus />} type="success">
-            Add Key
-          </Button>
-        </Card>
-        <Spacer h={5}></Spacer>
-        <Card shadow width="200px" height="200px">
-          <FilePlus size={100} />
-          <Spacer h={1}></Spacer>
-          <Button icon={<Plus />} type="success">
-            Sign Document
-          </Button>
-        </Card>
+        <Grid.Container gap={2} justify="center" height="100px">
+          <Grid xs={6}>
+            <Card shadow width="200px" height="200px">
+              <Key size={100} style={{ textAlign: 'center' }} />
+              <Spacer h={1}></Spacer>
+              <Button icon={<Plus />} type="success">
+                Add Key
+              </Button>
+            </Card>
+          </Grid>
+          <Grid xs={6}>
+            <Card shadow width="200px" height="200px">
+              <FilePlus size={100} />
+              <Spacer h={1}></Spacer>
+              <Button icon={<Plus />} type="success">
+                Sign Document
+              </Button>
+            </Card>
+          </Grid>
+        </Grid.Container>
       </main>
 
       <footer className={styles.footer}>
