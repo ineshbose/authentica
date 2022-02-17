@@ -68,7 +68,7 @@ import {
   });
 
   await apolloServer.start();
-  apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({ app, cors: true });
 
   app.listen(port, () => {
     console.log(`Authentica server listening on port ${port}`);
