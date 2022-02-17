@@ -23,9 +23,17 @@ const Home: NextPage = () => {
   console.log(selectedOption);
 
   const optionsSelector = (
-    <Select placeholder="Choose one" onChange={setSelectedOption}>
-      <Select.Option value="1">Option 1</Select.Option>
-      <Select.Option value="2">Option 2</Select.Option>
+    <Select placeholder="Choose A Key" onChange={setSelectedOption}>
+      <Select.Option value="1">Key 1</Select.Option>
+      <Select.Option value="2">Key 2</Select.Option>
+    </Select>
+  );
+
+  const optionsSelectorKey = (
+    <Select placeholder="Choose A Strength" onChange={setSelectedOption}>
+      <Select.Option value="1">Low</Select.Option>
+      <Select.Option value="2">Medium</Select.Option>
+      <Select.Option value="2">High</Select.Option>
     </Select>
   );
 
@@ -44,8 +52,8 @@ const Home: NextPage = () => {
         <Modal.Content>
           <Input label="Key Name" />
           <Spacer h={1}></Spacer>
-          <Input disabled placeholder="Key Strength" width={8} />
-          {optionsSelector}
+          <Input disabled placeholder="Key Strength" width={7} />
+          {optionsSelectorKey}
           <Spacer h={1}></Spacer>
           <Input label="Key Expiration" />
           <Spacer h={1}></Spacer>
@@ -61,7 +69,7 @@ const Home: NextPage = () => {
   const signDocument = (
     <>
       <Button
-        icon={<Plus />}
+        icon={<FilePlus />}
         auto
         type="success"
         onClick={() => setDocModalVisible(true)}
@@ -71,13 +79,9 @@ const Home: NextPage = () => {
       <Modal visible={docModalVisible}>
         <Modal.Title>Sign Document</Modal.Title>
         <Modal.Content>
-          <h3>Key To Use</h3>
-          {optionsSelector}
+          <h5>Key To Use</h5> {optionsSelector}
           <Spacer h={1}></Spacer>
-          <Input label="Key Strength" />
-          <Spacer h={1}></Spacer>
-          <Input label="Key Expiration" />
-          <Spacer h={1}></Spacer>
+          <Input label="Document Name: " />
         </Modal.Content>
         <Modal.Action passive onClick={() => setDocModalVisible(false)}>
           Cancel
@@ -91,45 +95,25 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h3 className={styles.title}>Authentica</h3>
-        <Spacer h={1}></Spacer>
-        <Card shadow width="200px" height="200px">
-          <Key size={100} />
-          <Spacer h={1}></Spacer>
-          {addKey}
-        </Card>
-        <Spacer h={5}></Spacer>
-        <Card shadow width="200px" height="200px">
-          <FilePlus size={100} />
-          <Spacer h={1}></Spacer>
-          {signDocument}
-        </Card>
-        <Spacer h={2}></Spacer>
+        <Spacer h={4}></Spacer>
 
-        <Grid.Container gap={2} justify="center" height="100px">
-          <Grid xs={4}>
+        <Grid.Container gap={2} justify="center">
+          <Grid xs={8} md={4}>
             <Card shadow width="200px" height="250px">
-              <Key
-                size={100}
-                // justify="center"
-                style={{ textAlign: 'center' }}
-              />
+              <Key size={100} />
               <Spacer h={1}></Spacer>
-              <Button icon={<Plus />} type="success">
-                Add Key
-              </Button>
+              {addKey}
               <Spacer h={1}></Spacer>
               <Button icon={<Key />} type="success">
                 Existing Keys
               </Button>
             </Card>
           </Grid>
-          <Grid xs={6}>
+          <Grid xs={12} md={4}>
             <Card shadow width="200px" height="250px">
               <FileText size={100} />
               <Spacer h={1}></Spacer>
-              <Button icon={<FilePlus />} type="success">
-                Sign Document
-              </Button>
+              {signDocument}
               <Spacer h={1}></Spacer>
               <Button icon={<FileText />} type="success">
                 Signed Document
