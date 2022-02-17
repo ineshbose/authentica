@@ -1,8 +1,8 @@
+import { MouseEvent, useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useState } from 'react';
-import { useRegisterMutation } from '../src/generated/graphql';
+import { useRegisterMutation } from '../graphql';
 import styles from '../styles/Home.module.css';
 
 const Register: NextPage = () => {
@@ -10,6 +10,21 @@ const Register: NextPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [register] = useRegisterMutation();
+
+  const submitForm = async (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _e: MouseEvent<HTMLButtonElement> | undefined
+  ) => {
+    console.log('form submitted');
+    console.log(email, password);
+    const response = await register({
+      variables: {
+        email,
+        password,
+      },
+    });
+    console.log(response);
+  };
 
   return (
     <div className={styles.container}>
@@ -41,22 +56,7 @@ const Register: NextPage = () => {
           }}
         />{' '}
         <Spacer h={1} />
-        <Button
-          auto
-          type="success"
-          onClick={async (e) => {
-            e.preventDefault();
-            console.log('form submitted');
-            console.log(email, password);
-            const response = await register({
-              variables: {
-                email,
-                password,
-              },
-            });
-            console.log(response);
-          }}
-        >
+        <Button auto type="success" onClick={submitForm}>
           Submit
         </Button>
       </main>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Button,
   Card,
@@ -14,11 +14,9 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  const [selectedOption, setSelectedOption] = React.useState<
-    string | string[]
-  >();
-  const [keyModalVisible, setKeyModalVisible] = React.useState<boolean>(false);
-  const [docModalVisible, setDocModalVisible] = React.useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | string[]>();
+  const [keyModalVisible, setKeyModalVisible] = useState<boolean>(false);
+  const [docModalVisible, setDocModalVisible] = useState<boolean>(false);
 
   console.log(selectedOption);
 

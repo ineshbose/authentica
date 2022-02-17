@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useState } from 'react';
-import { useLoginMutation } from '../src/generated/graphql';
+import { useLoginMutation } from '../graphql';
 import styles from '../styles/Home.module.css';
 
 const Login: NextPage = () => {
