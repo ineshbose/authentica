@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Button,
   Card,
@@ -5,7 +6,6 @@ import {
   Modal,
   Select,
   Spacer,
-  useModal,
   Grid,
 } from '@geist-ui/core';
 import { FilePlus, FileText, Key, Plus } from '@geist-ui/icons';
@@ -14,81 +14,78 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  const optionsSelecter = () => {
-    const handler = (val: any) => console.log(val);
-    return (
-      <Select placeholder="Choose one" onChange={handler}>
-        <Select.Option value="1">Option 1</Select.Option>
-        <Select.Option value="2">Option 2</Select.Option>
-      </Select>
-    );
-  };
+  const [selectedOption, setSelectedOption] = React.useState<
+    string | string[]
+  >();
+  const [keyModalVisible, setKeyModalVisible] = React.useState<boolean>(false);
+  const [docModalVisible, setDocModalVisible] = React.useState<boolean>(false);
 
-  const addKey = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { setVisible, bindings } = useModal();
-    return (
-      <>
-        <Button
-          icon={<Plus />}
-          auto
-          type="success"
-          onClick={() => setVisible(true)}
-        >
-          Add Key
-        </Button>
-        <Modal {...bindings}>
-          <Modal.Title>Add Key</Modal.Title>
-          <Modal.Content>
-            <Input label="Key Name" />
-            <Spacer h={1}></Spacer>
-            <Input disabled placeholder="Key Strength" />
-            {optionsSelecter()}
-            <Spacer h={1}></Spacer>
-            <Input label="Key Expiration" />
-            <Spacer h={1}></Spacer>
-          </Modal.Content>
-          <Modal.Action passive onClick={() => setVisible(false)}>
-            Cancel
-          </Modal.Action>
-          <Modal.Action>Submit</Modal.Action>
-        </Modal>
-      </>
-    );
-  };
+  console.log(selectedOption);
 
-  const signDocument = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { setVisible, bindings } = useModal();
-    return (
-      <>
-        <Button
-          icon={<Plus />}
-          auto
-          type="success"
-          onClick={() => setVisible(true)}
-        >
-          Sign Document
-        </Button>
-        <Modal {...bindings}>
-          <Modal.Title>Sign Document</Modal.Title>
-          <Modal.Content>
-            <h3>Key To Use</h3>
-            {optionsSelecter()}
-            <Spacer h={1}></Spacer>
-            <Input label="Key Strength" />
-            <Spacer h={1}></Spacer>
-            <Input label="Key Expiration" />
-            <Spacer h={1}></Spacer>
-          </Modal.Content>
-          <Modal.Action passive onClick={() => setVisible(false)}>
-            Cancel
-          </Modal.Action>
-          <Modal.Action>Submit</Modal.Action>
-        </Modal>
-      </>
-    );
-  };
+  const optionsSelector = (
+    <Select placeholder="Choose one" onChange={setSelectedOption}>
+      <Select.Option value="1">Option 1</Select.Option>
+      <Select.Option value="2">Option 2</Select.Option>
+    </Select>
+  );
+
+  const addKey = (
+    <>
+      <Button
+        icon={<Plus />}
+        auto
+        type="success"
+        onClick={() => setKeyModalVisible(true)}
+      >
+        Add Key
+      </Button>
+      <Modal visible={keyModalVisible}>
+        <Modal.Title>Add Key</Modal.Title>
+        <Modal.Content>
+          <Input label="Key Name" />
+          <Spacer h={1}></Spacer>
+          <Input disabled placeholder="Key Strength" width={8} />
+          {optionsSelector}
+          <Spacer h={1}></Spacer>
+          <Input label="Key Expiration" />
+          <Spacer h={1}></Spacer>
+        </Modal.Content>
+        <Modal.Action passive onClick={() => setKeyModalVisible(false)}>
+          Cancel
+        </Modal.Action>
+        <Modal.Action>Submit</Modal.Action>
+      </Modal>
+    </>
+  );
+
+  const signDocument = (
+    <>
+      <Button
+        icon={<Plus />}
+        auto
+        type="success"
+        onClick={() => setDocModalVisible(true)}
+      >
+        Sign Document
+      </Button>
+      <Modal visible={docModalVisible}>
+        <Modal.Title>Sign Document</Modal.Title>
+        <Modal.Content>
+          <h3>Key To Use</h3>
+          {optionsSelector}
+          <Spacer h={1}></Spacer>
+          <Input label="Key Strength" />
+          <Spacer h={1}></Spacer>
+          <Input label="Key Expiration" />
+          <Spacer h={1}></Spacer>
+        </Modal.Content>
+        <Modal.Action passive onClick={() => setDocModalVisible(false)}>
+          Cancel
+        </Modal.Action>
+        <Modal.Action>Submit</Modal.Action>
+      </Modal>
+    </>
+  );
 
   return (
     <div className={styles.container}>
@@ -98,13 +95,13 @@ const Home: NextPage = () => {
         <Card shadow width="200px" height="200px">
           <Key size={100} />
           <Spacer h={1}></Spacer>
-          {addKey()}
+          {addKey}
         </Card>
         <Spacer h={5}></Spacer>
         <Card shadow width="200px" height="200px">
           <FilePlus size={100} />
           <Spacer h={1}></Spacer>
-          {signDocument()}
+          {signDocument}
         </Card>
         <Spacer h={2}></Spacer>
 
