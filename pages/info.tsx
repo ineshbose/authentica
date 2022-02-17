@@ -1,6 +1,7 @@
 import { Button, Grid, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -14,9 +15,9 @@ const Home: NextPage = () => {
         </p>
         <Spacer h={1}></Spacer>
         <Grid.Container gap={1.5} justify="center">
-          <a href="/home" className="p-2" data-v-6bb1f438>
+          <Link href="/home" passHref>
             <Button type="success">Get Started</Button>
-          </a>
+          </Link>
           <Button type="success">Documentation</Button>
         </Grid.Container>
       </main>
