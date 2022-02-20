@@ -25,13 +25,5 @@
     "class-methods-use-this": "off",
     "no-console": "off"
   },
-  "overrides": [
-    {
-      "parser": "@typescript-eslint/parser",
-      "files": ["server/**/*.ts"],
-      "parserOptions": {
-        "project": "tsconfig.server.json"
-      }
-    }
-  ]
+  "ignorePatterns": ["graphql"]
 }

@@ -26,16 +26,18 @@ npm install --global yarn
 
 ### Running the App
 
-#### Backend
+#### Database Setup
 
 ```sh
-yarn runserver
+yarn prisma migrate # dev
+# npx prisma migrate
 ```
 
-#### Frontend
+#### Application
 
 ```sh
 yarn dev
+# npm run dev
 ```
 
 #### `launch.json` (convenient option)*
@@ -44,21 +46,7 @@ yarn dev
 {
     "configurations": [
         {
-            "name": "authentica-backend",
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "yarn",
-            "cwd": "${workspaceFolder}",
-            "console": "integratedTerminal",
-            "runtimeArgs": [
-                "runserver"
-            ],
-            "skipFiles": [
-                "<node_internals>/**"
-            ]
-        },
-        {
-            "name": "authentica-frontend",
+            "name": "Authentica",
             "type": "node",
             "request": "launch",
             "runtimeExecutable": "yarn",
@@ -70,15 +58,6 @@ yarn dev
             "skipFiles": [
                 "<node_internals>/**"
             ]
-        },
-    ],
-    "compounds": [
-        {
-            "name": "Authentica",
-            "configurations": [
-                "authentica-backend",
-                "authentica-frontend"
-            ]
         }
     ]
 }
@@ -87,11 +66,14 @@ yarn dev
 ### Dev References
 
 * [`benawad/jwt-auth-example`](https://github.com/benawad/jwt-auth-example)
+* [`prisma/awesome-links`](https://github.com/prisma/awesome-links)
+* [`prisma/prisma-examples`](https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-nextjs)
 
 ## Developed With
 
-* [Express](https://expressjs.com/)
 * [Next.js](https://nextjs.org/)
+* [Prisma](https://www.prisma.io/)
+* [GraphQL](https://graphql.org/)
 * [Geist UI](https://geist-ui.dev/)
 
 ## Team Members
