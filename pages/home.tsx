@@ -17,6 +17,10 @@ const Home: NextPage = () => {
   const [selectedOption, setSelectedOption] = useState<string | string[]>();
   const [keyModalVisible, setKeyModalVisible] = useState<boolean>(false);
   const [docModalVisible, setDocModalVisible] = useState<boolean>(false);
+  const [existKeysModalVisible, setExistKeysModalVisible] =
+    useState<boolean>(false);
+  const [signedDocsModalVisible, setSignedDocsModalVisible] =
+    useState<boolean>(false);
 
   console.log(selectedOption);
 
@@ -64,6 +68,26 @@ const Home: NextPage = () => {
     </>
   );
 
+  const existingKeys = (
+    <>
+      <Button
+        icon={<Key />}
+        auto
+        type="success"
+        onClick={() => setExistKeysModalVisible(true)}
+      >
+        Existing Keys
+      </Button>
+      <Modal visible={existKeysModalVisible}>
+        <Modal.Title>Existing Keys</Modal.Title>
+        <Modal.Content>hi</Modal.Content>
+        <Modal.Action passive onClick={() => setExistKeysModalVisible(false)}>
+          Close
+        </Modal.Action>
+      </Modal>
+    </>
+  );
+
   const signDocument = (
     <>
       <Button
@@ -89,6 +113,26 @@ const Home: NextPage = () => {
     </>
   );
 
+  const signedDocs = (
+    <>
+      <Button
+        icon={<FileText />}
+        auto
+        type="success"
+        onClick={() => setSignedDocsModalVisible(true)}
+      >
+        Signed Documents
+      </Button>
+      <Modal visible={signedDocsModalVisible}>
+        <Modal.Title>Signed Documents</Modal.Title>
+        <Modal.Content>hi</Modal.Content>
+        <Modal.Action passive onClick={() => setSignedDocsModalVisible(false)}>
+          Close
+        </Modal.Action>
+      </Modal>
+    </>
+  );
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -97,25 +141,21 @@ const Home: NextPage = () => {
 
         <Grid.Container gap={2} justify="center">
           <Grid xs={8} md={4}>
-            <Card shadow width="200px" height="250px">
+            <Card shadow width="210px" height="250px">
               <Key size={100} />
               <Spacer h={1}></Spacer>
               {addKey}
               <Spacer h={1}></Spacer>
-              <Button icon={<Key />} type="success">
-                Existing Keys
-              </Button>
+              {existingKeys}
             </Card>
           </Grid>
           <Grid xs={12} md={4}>
-            <Card shadow width="200px" height="250px">
+            <Card shadow width="210px" height="250px">
               <FileText size={100} />
               <Spacer h={1}></Spacer>
               {signDocument}
               <Spacer h={1}></Spacer>
-              <Button icon={<FileText />} type="success">
-                Signed Document
-              </Button>
+              {signedDocs}
             </Card>
           </Grid>
         </Grid.Container>
