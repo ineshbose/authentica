@@ -18,7 +18,9 @@ const Home: NextPage = () => {
           <Link href="/home" passHref>
             <Button type="success">Get Started</Button>
           </Link>
-          <Button type="success">Documentation</Button>
+          <Link href="https://github.com/ineshbose/authentica" passHref>
+            <Button type="success">Documentation</Button>
+          </Link>
         </Grid.Container>
       </main>
 
