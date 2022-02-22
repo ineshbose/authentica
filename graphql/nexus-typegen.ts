@@ -31,8 +31,8 @@ export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   User: { // root type
+    email?: string | null; // String
     id?: number | null; // Int
-    name?: string | null; // String
     password?: string | null; // String
   }
 }
@@ -49,35 +49,41 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
-    signupUser: NexusGenRootTypes['User'] | null; // User
+    login: NexusGenRootTypes['User'] | null; // User
+    register: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     hello: string | null; // String
   }
   User: { // field return type
+    email: string | null; // String
     id: number | null; // Int
-    name: string | null; // String
     password: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
-    signupUser: 'User'
+    login: 'User'
+    register: 'User'
   }
   Query: { // field return type name
     hello: 'String'
   }
   User: { // field return type name
+    email: 'String'
     id: 'Int'
-    name: 'String'
     password: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    signupUser: { // args
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    register: { // args
       email: string; // String!
       password: string; // String!
     }

@@ -35,17 +35,14 @@ const Login: NextPage = () => {
         <Button
           auto
           type="success"
-          onClick={async (e) => {
-            e.preventDefault();
-            console.log('form submitted');
-            console.log(email, password);
+          onClick={async () => {
             const response = await login({
               variables: {
                 email,
                 password,
               },
             });
-            console.log(response);
+            console.log(response.data);
           }}
         >
           Submit
