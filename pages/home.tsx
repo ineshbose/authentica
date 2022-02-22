@@ -7,6 +7,7 @@ import {
   Select,
   Spacer,
   Grid,
+  Tooltip,
 } from '@geist-ui/core';
 import { FilePlus, FileText, Key, Plus } from '@geist-ui/icons';
 import { NextPage } from 'next';
@@ -144,18 +145,26 @@ const Home: NextPage = () => {
             <Card shadow width="210px" height="250px">
               <Key size={100} />
               <Spacer h={1}></Spacer>
-              {addKey}
+              <Tooltip text={'tip.'} placement="left">
+                {addKey}
+              </Tooltip>
               <Spacer h={1}></Spacer>
-              {existingKeys}
+              <Tooltip text={'tip.'} placement="left">
+                {existingKeys}
+              </Tooltip>
             </Card>
           </Grid>
           <Grid xs={12} md={4}>
             <Card shadow width="210px" height="250px">
               <FileText size={100} />
               <Spacer h={1}></Spacer>
-              {signDocument}
+              <Tooltip text={'tip.'} placement="right">
+                {signDocument}
+              </Tooltip>
               <Spacer h={1}></Spacer>
-              {signedDocs}
+              <Tooltip text={'tip.'} placement="right">
+                {signedDocs}
+              </Tooltip>
             </Card>
           </Grid>
         </Grid.Container>
