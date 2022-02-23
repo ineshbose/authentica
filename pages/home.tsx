@@ -177,4 +177,6 @@ const Home: NextPage = () => {
   );
 };
 
+// Honestly just wanted to show up as a contributor :eyes:
+
 export default Home;
