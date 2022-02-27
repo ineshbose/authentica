@@ -141,28 +141,48 @@ const Home: NextPage = () => {
         <Spacer h={4}></Spacer>
 
         <Grid.Container gap={2} justify="center">
-          <Grid xs={8} md={4}>
+          <Grid xs={8} md={5}>
             <Card shadow width="210px" height="250px">
               <Key size={100} />
               <Spacer h={1}></Spacer>
-              <Tooltip text={'tip.'} placement="left">
+              <Tooltip
+                text={
+                  'The key can be used to sign digital documents. Adding a key adds another verification method. Sometimes users might want to have more than one key, for example, a work key and a personal key.'
+                }
+                placement="left"
+              >
                 {addKey}
               </Tooltip>
               <Spacer h={1}></Spacer>
-              <Tooltip text={'tip.'} placement="left">
+              <Tooltip
+                text={
+                  'Select keys ready to be used for signing digital documents. Please ensure that you are selecting the correct pre-existing key, with which you intend to sign the digital document. '
+                }
+                placement="left"
+              >
                 {existingKeys}
               </Tooltip>
             </Card>
           </Grid>
-          <Grid xs={12} md={4}>
+          <Grid xs={12} md={3}>
             <Card shadow width="210px" height="250px">
               <FileText size={100} />
               <Spacer h={1}></Spacer>
-              <Tooltip text={'tip.'} placement="right">
+              <Tooltip
+                text={
+                  'Sign a digital document using a pre-existing key from your authentica account. This is useful for verifying the proof of ownership of a document for example.'
+                }
+                placement="right"
+              >
                 {signDocument}
               </Tooltip>
               <Spacer h={1}></Spacer>
-              <Tooltip text={'tip.'} placement="right">
+              <Tooltip
+                text={
+                  'View the previous documents you have signed using your authentica account keys. Signed documents are ready to be shared with 3rd parties. Their signature can be verified using authentica.'
+                }
+                placement="right"
+              >
                 {signedDocs}
               </Tooltip>
             </Card>
