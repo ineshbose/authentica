@@ -15,10 +15,22 @@ export type Scalars = {
   Float: number;
 };
 
+export type Document = {
+  __typename?: 'Document';
+  id?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  addDocument?: Maybe<Document>;
   login?: Maybe<User>;
   register?: Maybe<User>;
+};
+
+
+export type MutationAddDocumentArgs = {
+  userId: Scalars['Int'];
 };
 
 
@@ -45,6 +57,13 @@ export type User = {
   password?: Maybe<Scalars['String']>;
 };
 
+export type AddDocumentMutationVariables = Exact<{
+  userId: Scalars['Int'];
+}>;
+
+
+export type AddDocumentMutation = { __typename?: 'Mutation', addDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
+
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -67,6 +86,40 @@ export type RegisterMutationVariables = Exact<{
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
 
 
+export const AddDocumentDocument = gql`
+    mutation AddDocument($userId: Int!) {
+  addDocument(userId: $userId) {
+    id
+    userId
+  }
+}
+    `;
+export type AddDocumentMutationFn = Apollo.MutationFunction<AddDocumentMutation, AddDocumentMutationVariables>;
+
+/**
+ * __useAddDocumentMutation__
+ *
+ * To run a mutation, you first call `useAddDocumentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddDocumentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addDocumentMutation, { data, loading, error }] = useAddDocumentMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useAddDocumentMutation(baseOptions?: Apollo.MutationHookOptions<AddDocumentMutation, AddDocumentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddDocumentMutation, AddDocumentMutationVariables>(AddDocumentDocument, options);
+      }
+export type AddDocumentMutationHookResult = ReturnType<typeof useAddDocumentMutation>;
+export type AddDocumentMutationResult = Apollo.MutationResult<AddDocumentMutation>;
+export type AddDocumentMutationOptions = Apollo.BaseMutationOptions<AddDocumentMutation, AddDocumentMutationVariables>;
 export const HelloDocument = gql`
     query Hello {
   hello

@@ -1,0 +1,6 @@
+mutation AddDocument($userId: Int!) {
+    addDocument(userId: $userId) {
+        id,
+        userId
+    }
+}

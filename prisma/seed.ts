@@ -6,10 +6,12 @@ const userData: Prisma.UserCreateInput[] = [
   {
     email: 'alice@authentica.io',
     password: 'password123',
+    pubkey: 'abcdefg',
   },
   {
     email: 'bob@authentica.io',
     password: 'password123',
+    pubkey: '1234567',
   },
 ];
 
