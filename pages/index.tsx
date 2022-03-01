@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         </p>
         <Spacer h={1}></Spacer>
         <Grid.Container gap={1.5} justify="center">
-          <Link href="/home" passHref>
+          <Link href="/dashboard" passHref>
             <Button type="success">Get Started</Button>
           </Link>
           <Link href="https://github.com/ineshbose/authentica" passHref>
