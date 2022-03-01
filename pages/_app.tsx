@@ -1,20 +1,20 @@
 import '../styles/globals.css';
 import { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
-import { SessionProvider } from 'next-auth/react';
 import { CssBaseline, GeistProvider } from '@geist-ui/core';
 import client from '../graphql/apollo-client';
+import { ContextProvider } from '../lib/AppContext';
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <ContextProvider>
         <GeistProvider>
           <CssBaseline />
           <Component {...pageProps} />
         </GeistProvider>
-      </ApolloProvider>
-    </SessionProvider>
+      </ContextProvider>
+    </ApolloProvider>
   );
 }
 

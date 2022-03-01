@@ -56,7 +56,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'User', email?: string | null, password?: string | null } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
 
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
@@ -64,7 +64,7 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', email?: string | null, password?: string | null } | null };
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
 
 
 export const HelloDocument = gql`
@@ -102,8 +102,8 @@ export type HelloQueryResult = Apollo.QueryResult<HelloQuery, HelloQueryVariable
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
+    id
     email
-    password
   }
 }
     `;
@@ -137,8 +137,8 @@ export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, Log
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!) {
   register(email: $email, password: $password) {
+    id
     email
-    password
   }
 }
     `;
