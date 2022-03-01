@@ -13,12 +13,19 @@ const Home: NextPage = () => {
           Authentica is a service that allows signing online public documents
           using a key system.
         </p>
+        <p>If you have an account please Login , if not please register.</p>
         <Spacer h={1}></Spacer>
         <Grid.Container gap={1.5} justify="center">
-          <Link href="/home" passHref>
-            <Button type="success">Get Started</Button>
-          </Link>
-          <Button type="success">Documentation</Button>
+          <Grid xs={6} md={3}>
+            <Link href="/login" passHref>
+              <Button type="success">Log in</Button>
+            </Link>
+          </Grid>
+          <Grid xs={6} md={2}>
+            <Link href="register" passHref>
+              <Button type="success">Register</Button>
+            </Link>
+          </Grid>
         </Grid.Container>
       </main>
 
