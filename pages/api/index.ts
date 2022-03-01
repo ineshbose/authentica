@@ -6,11 +6,13 @@ import path from 'path';
 import cors from 'micro-cors';
 import prisma from '../../lib/prisma';
 
+prisma.user.findMany().then(console.log);
+
 const User = objectType({
   name: 'User',
   definition(t) {
     t.int('id');
-    t.string('name');
+    t.string('email');
     t.string('password');
   },
 });
@@ -29,7 +31,7 @@ const Query = objectType({
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    t.field('signupUser', {
+    t.field('register', {
       type: 'User',
       args: {
         email: nonNull(stringArg()),
@@ -42,6 +44,23 @@ const Mutation = objectType({
             password,
           },
         });
+      },
+    });
+    t.field('login', {
+      type: 'User',
+      args: {
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      resolve: async (_, { email, password }) => {
+        const user = await prisma.user.findFirst({
+          where: {
+            email,
+            password,
+          },
+        });
+
+        return user;
       },
     });
   },

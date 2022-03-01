@@ -1,14 +1,27 @@
+import { Button, Grid, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
-const Index: NextPage = () => {
+const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h3 className={styles.title}>Authentica</h3>
+        <p>
+          Authentica is a service that allows signing online public documents
+          using a key system.
+        </p>
+        <Spacer h={1}></Spacer>
+        <Grid.Container gap={1.5} justify="center">
+          <Link href="/dashboard" passHref>
+            <Button type="success">Get Started</Button>
+          </Link>
+          <Link href="https://github.com/ineshbose/authentica" passHref>
+            <Button type="success">Documentation</Button>
+          </Link>
+        </Grid.Container>
       </main>
 
       <footer className={styles.footer}>
@@ -27,4 +40,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default Home;

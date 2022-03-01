@@ -2,18 +2,24 @@ import { useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useLoginMutation } from '../graphql';
 import styles from '../styles/Home.module.css';
+import useAppContext from '../lib/AppContext';
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login] = useLoginMutation();
+  const {
+    user,
+    helpers: { login },
+  } = useAppContext();
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h3 className={styles.title}>Authentica</h3>
+        <h6>
+          {user ? 'You are authenticated.' : 'You are not authenticated.'}
+        </h6>
         <Spacer h={1}></Spacer>
         <Input
           value={email}
@@ -35,18 +41,12 @@ const Login: NextPage = () => {
         <Button
           auto
           type="success"
-          onClick={async (e) => {
-            e.preventDefault();
-            console.log('form submitted');
-            console.log(email, password);
-            const response = await login({
-              variables: {
-                email,
-                password,
-              },
-            });
-            console.log(response);
-          }}
+          onClick={() =>
+            login({
+              email,
+              password,
+            })
+          }
         >
           Submit
         </Button>
