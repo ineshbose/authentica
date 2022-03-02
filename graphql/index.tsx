@@ -26,6 +26,7 @@ export type Mutation = {
   addDocument?: Maybe<Document>;
   login?: Maybe<User>;
   register?: Maybe<User>;
+  removeDocument?: Maybe<Document>;
 };
 
 
@@ -43,6 +44,12 @@ export type MutationLoginArgs = {
 export type MutationRegisterArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationRemoveDocumentArgs = {
+  id: Scalars['Int'];
+  userId: Scalars['Int'];
 };
 
 export type Query = {
@@ -84,6 +91,14 @@ export type RegisterMutationVariables = Exact<{
 
 
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
+
+export type RemoveDocumentMutationVariables = Exact<{
+  id: Scalars['Int'];
+  userId: Scalars['Int'];
+}>;
+
+
+export type RemoveDocumentMutation = { __typename?: 'Mutation', removeDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
 
 
 export const AddDocumentDocument = gql`
@@ -222,3 +237,38 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const RemoveDocumentDocument = gql`
+    mutation RemoveDocument($id: Int!, $userId: Int!) {
+  removeDocument(id: $id, userId: $userId) {
+    id
+    userId
+  }
+}
+    `;
+export type RemoveDocumentMutationFn = Apollo.MutationFunction<RemoveDocumentMutation, RemoveDocumentMutationVariables>;
+
+/**
+ * __useRemoveDocumentMutation__
+ *
+ * To run a mutation, you first call `useRemoveDocumentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveDocumentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeDocumentMutation, { data, loading, error }] = useRemoveDocumentMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useRemoveDocumentMutation(baseOptions?: Apollo.MutationHookOptions<RemoveDocumentMutation, RemoveDocumentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveDocumentMutation, RemoveDocumentMutationVariables>(RemoveDocumentDocument, options);
+      }
+export type RemoveDocumentMutationHookResult = ReturnType<typeof useRemoveDocumentMutation>;
+export type RemoveDocumentMutationResult = Apollo.MutationResult<RemoveDocumentMutation>;
+export type RemoveDocumentMutationOptions = Apollo.BaseMutationOptions<RemoveDocumentMutation, RemoveDocumentMutationVariables>;

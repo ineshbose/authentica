@@ -60,6 +60,7 @@ export interface NexusGenFieldTypes {
     addDocument: NexusGenRootTypes['Document'] | null; // Document
     login: NexusGenRootTypes['User'] | null; // User
     register: NexusGenRootTypes['User'] | null; // User
+    removeDocument: NexusGenRootTypes['Document'] | null; // Document
   }
   Query: { // field return type
     hello: string | null; // String
@@ -80,6 +81,7 @@ export interface NexusGenFieldTypeNames {
     addDocument: 'Document'
     login: 'User'
     register: 'User'
+    removeDocument: 'Document'
   }
   Query: { // field return type name
     hello: 'String'
@@ -103,6 +105,10 @@ export interface NexusGenArgTypes {
     register: { // args
       email: string; // String!
       password: string; // String!
+    }
+    removeDocument: { // args
+      id: number; // Int!
+      userId: number; // Int!
     }
   }
 }

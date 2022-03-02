@@ -76,11 +76,41 @@ const Mutation = objectType({
       args: {
         userId: nonNull(intArg()),
       },
-      resolve: (_, { userId }) => {
-        return prisma.document.create({
+      resolve: async (_, { userId }) => {
+        const document = await prisma.document.create({
           data: {
             userId,
           },
+        });
+        return prisma.user.update({
+          where: { id: userId },
+          data: {
+            documents: {
+              connect: {
+                id: document.id,
+              },
+            },
+          },
+        });
+      },
+    });
+    t.field('removeDocument', {
+      type: 'Document',
+      args: {
+        id: nonNull(intArg()),
+        userId: nonNull(intArg()),
+      },
+      resolve: async (_, { id, userId }) => {
+        await prisma.user.update({
+          where: { id: userId },
+          data: {
+            documents: {
+              deleteMany: [{ id }],
+            },
+          },
+        });
+        return prisma.document.delete({
+          where: { id },
         });
       },
     });

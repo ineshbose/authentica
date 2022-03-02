@@ -11,6 +11,7 @@ type Mutation {
   addDocument(userId: Int!): Document
   login(email: String!, password: String!): User
   register(email: String!, password: String!): User
+  removeDocument(id: Int!, userId: Int!): Document
 }
 
 type Query {
