@@ -52,28 +52,40 @@ const Home: NextPage = () => {
           <br></br>
           <br></br>
           <h2>Cool, so how does it work?</h2>
-          When you create an account at Authentica, a public key is created for
-          your account. In our explanation, we will call this key <b>PK1</b>.
-          <br></br>
+          When you create an account at Authentica, a public-private key pair is
+          created for your account. In our explanation, we will call this
+          key-pair <b>PK1</b>.<br></br>
           <br></br>
           Once you have created your account, you can start signing digital
           documents. When you sign a digital document, a new key will be
-          generated. This document key will be generated using your account key,{' '}
-          <b>PK1</b>. Let&apos;s say we want to sign a document named{' '}
-          <b>hello_authentica.txt</b>. After successfully signing the document,
-          you receive <b>DK1</b>, document key 1. <b>DK1</b> can now be shared
-          along with the document to verify your signature.
+          generated. This document key will be generated using your private
+          account key, from <b>PK1</b>. Let&apos;s say we want to sign a
+          document named <b>hello_authentica.txt</b>. After successfully signing
+          the document, you receive <b>DK1</b>, document key 1. <b>DK1</b> can
+          now be shared along with the document to verify your signature.{' '}
+          <b>
+            NOTE: DK1 is not actually a crtypographic key like the keys in PK1.
+            It is a unique identifier encrypted by the private key of PK1.
+          </b>
           <br></br>
           <br></br>
           Let&apos;s say we want to verify someone else&apos;s signature. Then
           we take <b>DK1</b> which was shared with the digital document, and the
           public key of the user who shared the document, and try to verify that{' '}
-          <b>PK1</b> (the public key of the user who shared the document) was
+          <b>PK1</b> (the private key of the user who shared the document) was
           used to generate <b>DK1</b>.<br></br>
           <br></br>
           Authentica takes care of all this complicated key-business, for you!
           That being said, it&apos;s important that you understand the above in
           enough detail to securely use the system.
+          <br></br>
+          <br></br>
+          <Image
+            src="/Authentica_Signature_Diagram.png"
+            alt="Authentica Signature Diagram"
+            width={800}
+            height={560}
+          />
           <br></br>
           <br></br>
           <Link href="/dashboard" passHref>
