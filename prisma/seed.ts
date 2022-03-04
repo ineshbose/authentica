@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { getKeyPair } from '../lib/keygen';
 
 const prisma = new PrismaClient();
 
@@ -6,12 +7,12 @@ const userData: Prisma.UserCreateInput[] = [
   {
     email: 'alice@authentica.io',
     password: 'password123',
-    pubkey: 'abcdefg',
+    ...getKeyPair(),
   },
   {
     email: 'bob@authentica.io',
     password: 'password123',
-    pubkey: '1234567',
+    ...getKeyPair(),
   },
 ];
 

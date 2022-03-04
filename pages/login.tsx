@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+import Router from 'next/router';
 import useAppContext from '../lib/AppContext';
 
 const Login: NextPage = () => {
@@ -13,57 +12,54 @@ const Login: NextPage = () => {
     helpers: { login },
   } = useAppContext();
 
-  return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h3 className={styles.title}>Authentica</h3>
-        <h6>
-          {user ? 'You are authenticated.' : 'You are not authenticated.'}
-        </h6>
-        <Spacer h={1}></Spacer>
-        <Input
-          value={email}
-          placeholder="Email"
-          style={{ height: '160px', width: '200px' }}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />{' '}
-        <Spacer h={1} />
-        <Input.Password
-          value={password}
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />{' '}
-        <Spacer h={1} />
-        <Button
-          auto
-          type="success"
-          onClick={() =>
-            login({
-              email,
-              password,
-            })
-          }
-        >
-          Submit
-        </Button>
-      </main>
+  useEffect(() => {
+    if (user) {
+      Router.push('/dashboard');
+    }
+  }, [user]);
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        padding: '4rem 0',
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Spacer h={1}></Spacer>
+      <Input
+        value={email}
+        placeholder="Email"
+        style={{ height: '160px', width: '200px' }}
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+      />{' '}
+      <Spacer h={1} />
+      <Input.Password
+        value={password}
+        placeholder="Password"
+        onChange={(e) => {
+          setPassword(e.target.value);
+        }}
+      />{' '}
+      <Spacer h={1} />
+      <Button
+        auto
+        type="success"
+        onClick={() =>
+          login({
+            email,
+            password,
+          })
+        }
+      >
+        Submit
+      </Button>
     </div>
   );
 };

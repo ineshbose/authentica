@@ -11,7 +11,8 @@ model User {
   id        Int     @default(autoincrement()) @id
   email     String  @unique
   password  String
-  pubkey    String  @unique
+  pubkey    String
+  privkey   String
   documents Document[]
 }
 
