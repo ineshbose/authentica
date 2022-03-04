@@ -1,0 +1,6 @@
+mutation RemoveDocument($id: Int!, $userId: Int!) {
+    removeDocument(id: $id, userId: $userId) {
+        id,
+        userId
+    }
+}

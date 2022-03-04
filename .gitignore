@@ -15,6 +15,7 @@
 tmp/
 temp/
 db.sqlite3
+db.sqlite3-journal
 
 # misc
 .DS_Store

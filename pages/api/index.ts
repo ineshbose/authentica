@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiHandler } from 'next';
 import { RequestHandler } from 'micro';
-import { makeSchema, nonNull, objectType, stringArg } from 'nexus';
+import { makeSchema, nonNull, objectType, stringArg, intArg } from 'nexus';
 import path from 'path';
 import cors from 'micro-cors';
 import prisma from '../../lib/prisma';
@@ -14,6 +14,13 @@ const User = objectType({
     t.int('id');
     t.string('email');
     t.string('password');
+  },
+});
+const Document = objectType({
+  name: 'Document',
+  definition(t) {
+    t.int('id');
+    t.int('userId');
   },
 });
 
@@ -42,6 +49,7 @@ const Mutation = objectType({
           data: {
             email,
             password,
+            pubkey: '',
           },
         });
       },
@@ -63,11 +71,54 @@ const Mutation = objectType({
         return user;
       },
     });
+    t.field('addDocument', {
+      type: 'Document',
+      args: {
+        userId: nonNull(intArg()),
+      },
+      resolve: async (_, { userId }) => {
+        const document = await prisma.document.create({
+          data: {
+            userId,
+          },
+        });
+        return prisma.user.update({
+          where: { id: userId },
+          data: {
+            documents: {
+              connect: {
+                id: document.id,
+              },
+            },
+          },
+        });
+      },
+    });
+    t.field('removeDocument', {
+      type: 'Document',
+      args: {
+        id: nonNull(intArg()),
+        userId: nonNull(intArg()),
+      },
+      resolve: async (_, { id, userId }) => {
+        await prisma.user.update({
+          where: { id: userId },
+          data: {
+            documents: {
+              deleteMany: [{ id }],
+            },
+          },
+        });
+        return prisma.document.delete({
+          where: { id },
+        });
+      },
+    });
   },
 });
 
 export const schema = makeSchema({
-  types: [Query, Mutation, User],
+  types: [Query, Mutation, User, Document],
   outputs: {
     typegen: path.join(process.cwd(), 'graphql/nexus-typegen.ts'),
     schema: path.join(process.cwd(), 'graphql/schema.graphql'),
