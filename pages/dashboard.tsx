@@ -1,22 +1,13 @@
 import { useState } from 'react';
-import { Button, Card, Input, Modal, Select, Spacer } from '@geist-ui/core';
+import { Button, Card, Input, Modal, Spacer } from '@geist-ui/core';
 import { FilePlus, FileText } from '@geist-ui/icons';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  const [selectedOption, setSelectedOption] = useState<string | string[]>();
   const [docModalVisible, setDocModalVisible] = useState<boolean>(false);
   console.log(selectedOption);
-
-  const optionsSelectorKey = (
-    <Select placeholder="Choose A Strength" onChange={setSelectedOption}>
-      <Select.Option value="1">Low</Select.Option>
-      <Select.Option value="2">Medium</Select.Option>
-      <Select.Option value="2">High</Select.Option>
-    </Select>
-  );
 
   const signDocument = (
     <>
@@ -31,14 +22,6 @@ const Home: NextPage = () => {
       <Modal visible={docModalVisible}>
         <Modal.Title>Sign Document</Modal.Title>
         <Modal.Content>
-          <Input label="Key Name" />
-          <Spacer h={1}></Spacer>
-          <Input disabled placeholder="Key Strength" width={7} />
-          {optionsSelectorKey}
-          <Spacer h={1}></Spacer>
-          <Input label="Key Expiration" />
-          <Spacer h={1}></Spacer>
-
           <Input label="Document Name: " />
         </Modal.Content>
         <Modal.Action passive onClick={() => setDocModalVisible(false)}>

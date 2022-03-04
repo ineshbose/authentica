@@ -45,7 +45,29 @@
   font-size: 4rem;
 }
 
-.title,
+.subtitle,
+.description {
+  text-align: center;
+}
+
+.subtitle a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.subtitle a:hover,
+.subtitle a:focus,
+.subtitle a:active {
+  text-decoration: underline;
+}
+
+.subtitle {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2rem;
+}
+
+.subtitle,
 .description {
   text-align: center;
 }
