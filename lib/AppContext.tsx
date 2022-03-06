@@ -5,6 +5,7 @@ import {
   useRegisterMutation,
   useAddDocumentMutation,
   useRemoveDocumentMutation,
+  useGetDocumentsQuery,
 } from '../graphql';
 
 type AuthData = { email: string; password: string };
@@ -24,6 +25,7 @@ type AppContextType = {
     logout: () => void;
     addDocument: () => void;
     removeDocument: (d: number) => void;
+    getDocuments: (d: number) => Promise<any | FormError>;
   };
 };
 
@@ -36,6 +38,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [_register] = useRegisterMutation();
   const [_docAdd] = useAddDocumentMutation();
   const [_docRemove] = useRemoveDocumentMutation();
+  const [_getDocs] = useGetDocumentsQuery();
 
   const login = async (variables: AuthData) => {
     const response = await _login({ variables });
@@ -72,12 +75,30 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const getDocuments = async () => {
+    const userId = user?.id;
+    if (userId) {
+      const response = await _getDocs({ variables: { userId } });
+      if (response.data) {
+        return response.data;
+      }
+    }
+    return {};
+  };
+
   return (
     <AppContext.Provider
       value={{
         user,
         documents,
-        helpers: { login, register, logout, addDocument, removeDocument },
+        helpers: {
+          login,
+          register,
+          logout,
+          addDocument,
+          removeDocument,
+          getDocuments,
+        },
       }}
     >
       {children}

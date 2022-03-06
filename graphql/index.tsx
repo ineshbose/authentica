@@ -54,7 +54,13 @@ export type MutationRemoveDocumentArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getDocuments?: Maybe<User>;
   hello?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryGetDocumentsArgs = {
+  id: Scalars['Int'];
 };
 
 export type User = {
@@ -70,6 +76,13 @@ export type AddDocumentMutationVariables = Exact<{
 
 
 export type AddDocumentMutation = { __typename?: 'Mutation', addDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
+
+export type GetDocumentsQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type GetDocumentsQuery = { __typename?: 'Query', getDocuments?: { __typename?: 'User', id?: number | null } | null };
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -135,6 +148,41 @@ export function useAddDocumentMutation(baseOptions?: Apollo.MutationHookOptions<
 export type AddDocumentMutationHookResult = ReturnType<typeof useAddDocumentMutation>;
 export type AddDocumentMutationResult = Apollo.MutationResult<AddDocumentMutation>;
 export type AddDocumentMutationOptions = Apollo.BaseMutationOptions<AddDocumentMutation, AddDocumentMutationVariables>;
+export const GetDocumentsDocument = gql`
+    query GetDocuments($id: Int!) {
+  getDocuments(id: $id) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useGetDocumentsQuery__
+ *
+ * To run a query within a React component, call `useGetDocumentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDocumentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDocumentsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetDocumentsQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentsQuery, GetDocumentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDocumentsQuery, GetDocumentsQueryVariables>(GetDocumentsDocument, options);
+      }
+export function useGetDocumentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDocumentsQuery, GetDocumentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDocumentsQuery, GetDocumentsQueryVariables>(GetDocumentsDocument, options);
+        }
+export type GetDocumentsQueryHookResult = ReturnType<typeof useGetDocumentsQuery>;
+export type GetDocumentsLazyQueryHookResult = ReturnType<typeof useGetDocumentsLazyQuery>;
+export type GetDocumentsQueryResult = Apollo.QueryResult<GetDocumentsQuery, GetDocumentsQueryVariables>;
 export const HelloDocument = gql`
     query Hello {
   hello

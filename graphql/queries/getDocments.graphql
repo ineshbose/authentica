@@ -1,0 +1,5 @@
+query GetDocuments($id: Int!) {
+    getDocuments(id: $id) {
+        id,
+    }
+}

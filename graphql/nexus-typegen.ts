@@ -63,6 +63,7 @@ export interface NexusGenFieldTypes {
     removeDocument: NexusGenRootTypes['Document'] | null; // Document
   }
   Query: { // field return type
+    getDocuments: NexusGenRootTypes['User'] | null; // User
     hello: string | null; // String
   }
   User: { // field return type
@@ -84,6 +85,7 @@ export interface NexusGenFieldTypeNames {
     removeDocument: 'Document'
   }
   Query: { // field return type name
+    getDocuments: 'User'
     hello: 'String'
   }
   User: { // field return type name
@@ -109,6 +111,11 @@ export interface NexusGenArgTypes {
     removeDocument: { // args
       id: number; // Int!
       userId: number; // Int!
+    }
+  }
+  Query: {
+    getDocuments: { // args
+      id: number; // Int!
     }
   }
 }

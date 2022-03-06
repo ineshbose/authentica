@@ -15,6 +15,7 @@ type Mutation {
 }
 
 type Query {
+  getDocuments(id: Int!): User
   hello: String
 }
 
