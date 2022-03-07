@@ -7,7 +7,10 @@ import useAppContext from '../lib/AppContext';
 
 const Home: NextPage = () => {
   const [docModalVisible, setDocModalVisible] = useState<boolean>(false);
-  const { user } = useAppContext();
+  const {
+    user,
+    // helpers: { getDocuments },
+  } = useAppContext();
 
   useEffect(() => {
     if (!user) {
