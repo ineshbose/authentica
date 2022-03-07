@@ -38,7 +38,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [_register] = useRegisterMutation();
   const [_docAdd] = useAddDocumentMutation();
   const [_docRemove] = useRemoveDocumentMutation();
-  const [_getDocs] = useGetDocumentsQuery();
+  const getDoc = useGetDocumentsQuery;
 
   const login = async (variables: AuthData) => {
     const response = await _login({ variables });
@@ -78,7 +78,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const getDocuments = async () => {
     const userId = user?.id;
     if (userId) {
-      const response = await _getDocs({ variables: { userId } });
+      const response = getDoc({ variables: { userId } });
       if (response.data) {
         return response.data;
       }

@@ -54,7 +54,7 @@ export type MutationRemoveDocumentArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  getDocuments?: Maybe<User>;
+  getDocuments?: Maybe<Array<Maybe<Document>>>;
   hello?: Maybe<Scalars['String']>;
 };
 
@@ -78,11 +78,11 @@ export type AddDocumentMutationVariables = Exact<{
 export type AddDocumentMutation = { __typename?: 'Mutation', addDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
 
 export type GetDocumentsQueryVariables = Exact<{
-  id: Scalars['Int'];
+  userId: Scalars['Int'];
 }>;
 
 
-export type GetDocumentsQuery = { __typename?: 'Query', getDocuments?: { __typename?: 'User', id?: number | null } | null };
+export type GetDocumentsQuery = { __typename?: 'Query', getDocuments?: Array<{ __typename?: 'Document', id?: number | null } | null> | null };
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -149,8 +149,8 @@ export type AddDocumentMutationHookResult = ReturnType<typeof useAddDocumentMuta
 export type AddDocumentMutationResult = Apollo.MutationResult<AddDocumentMutation>;
 export type AddDocumentMutationOptions = Apollo.BaseMutationOptions<AddDocumentMutation, AddDocumentMutationVariables>;
 export const GetDocumentsDocument = gql`
-    query GetDocuments($id: Int!) {
-  getDocuments(id: $id) {
+    query GetDocuments($userId: Int!) {
+  getDocuments(id: $userId) {
     id
   }
 }
@@ -168,7 +168,7 @@ export const GetDocumentsDocument = gql`
  * @example
  * const { data, loading, error } = useGetDocumentsQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      userId: // value for 'userId'
  *   },
  * });
  */

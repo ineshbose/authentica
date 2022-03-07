@@ -15,7 +15,7 @@ type Mutation {
 }
 
 type Query {
-  getDocuments(id: Int!): User
+  getDocuments(id: Int!): [Document]
   hello: String
 }
 

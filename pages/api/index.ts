@@ -33,15 +33,14 @@ const Query = objectType({
         return 'hi';
       },
     });
-    t.field('getDocuments', {
-      type: 'User',
+    t.list.field('getDocuments', {
+      type: 'Document',
       args: {
         id: nonNull(intArg()),
       },
       resolve: async (_, { id }) => {
-        return prisma.user.findUnique({
-          where: { id },
-          select: { documents: true },
+        return prisma.document.findMany({
+          where: { userId: id },
         });
       },
     });
