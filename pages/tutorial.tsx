@@ -1,4 +1,4 @@
-import { Button, Card, Spacer } from '@geist-ui/core';
+import { Button, Card, Divider, Grid, Spacer } from '@geist-ui/core';
 import { Key } from '@geist-ui/icons';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -20,7 +20,9 @@ const Tutorial: NextPage = () => {
       <Spacer h={4}></Spacer>
 
       <Card shadow width="70%">
-        <Key size={100} />
+        <Grid.Container gap={2} justify="center" height="100px">
+          <Key size={100} />
+        </Grid.Container>
         <Spacer h={1}></Spacer>
         This tutorial will cover some of the most imporant parts of using
         Authentica, and will provide you with an overview of the technologies
@@ -28,6 +30,7 @@ const Tutorial: NextPage = () => {
         <br></br>
         <br></br>
         <h2>What is Authentica?</h2>
+        <Divider h="1px" my={0} />
         Authentica is a novel digital signature system, which uses public-key
         cryptography to allow users to sign digital documents, thereby verifying
         them. Typically, to sign a digital document, a digital signature is
@@ -43,6 +46,7 @@ const Tutorial: NextPage = () => {
         <br></br>
         <br></br>
         <h2>What is Authentica NOT?</h2>
+        <Divider h="1px" my={0} />
         Authentica does not allow you to communicate with other users privately.
         As a result, you cannot use Authentica as an end-to-end encrypted
         communications solution.
@@ -52,6 +56,7 @@ const Tutorial: NextPage = () => {
         <br></br>
         <br></br>
         <h2>Cool, so how does it work?</h2>
+        <Divider h="1px" my={0} />
         When you create an account at Authentica, a public-private key pair is
         created for your account. In our explanation, we will call this key-pair{' '}
         <b>PK1</b>.<br></br>
@@ -80,17 +85,22 @@ const Tutorial: NextPage = () => {
         enough detail to securely use the system.
         <br></br>
         <br></br>
-        <Image
-          src="/Authentica_Signature_Diagram.png"
-          alt="Authentica Signature Diagram"
-          width={800}
-          height={560}
-        />
+        <Grid.Container gap={2} justify="center" height="560px">
+          <Image
+            src="/Authentica_Signature_Diagram.png"
+            alt="Authentica Signature Diagram"
+            width={800}
+            height={560}
+            draggable={false}
+          />
+        </Grid.Container>
         <br></br>
         <br></br>
-        <Link href="/dashboard" passHref>
-          <Button type="success">Get Started</Button>
-        </Link>
+        <Grid.Container gap={2} justify="center" height="100px">
+          <Link href="/dashboard" passHref>
+            <Button type="success">Get Started</Button>
+          </Link>
+        </Grid.Container>
       </Card>
     </div>
   );
