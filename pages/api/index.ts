@@ -5,7 +5,7 @@ import { makeSchema, nonNull, objectType, stringArg, intArg } from 'nexus';
 import path from 'path';
 import cors from 'micro-cors';
 import prisma from '../../lib/prisma';
-import { getKeyPair } from '../../lib/keygen';
+import { getKeyPair, signDoc, verifyDoc } from '../../lib/keygen';
 
 prisma.user.findMany().then(console.log);
 
@@ -89,9 +89,14 @@ const Mutation = objectType({
         userId: nonNull(intArg()),
       },
       resolve: async (_, { userId }) => {
+        const user = await prisma.user.findUnique({
+          where: {id: userId},
+        });
+
         const document = await prisma.document.create({
           data: {
             userId,
+            ...signDoc(privkey: user.privkey, docName: "DocumentName")
           },
         });
         return prisma.user.update({

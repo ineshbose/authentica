@@ -20,4 +20,7 @@ model Document {
   id        Int     @id @default(autoincrement())
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
+  signature String
 }
+
+
