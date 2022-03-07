@@ -1,5 +1,5 @@
 query GetDocuments($userId: Int!) {
-    getDocuments(id: $userId) {
+    getDocuments(userId: $userId) {
         id
     }
 }

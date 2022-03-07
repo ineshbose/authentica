@@ -115,7 +115,7 @@ export interface NexusGenArgTypes {
   }
   Query: {
     getDocuments: { // args
-      id: number; // Int!
+      userId: number; // Int!
     }
   }
 }

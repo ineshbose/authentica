@@ -60,7 +60,7 @@ export type Query = {
 
 
 export type QueryGetDocumentsArgs = {
-  id: Scalars['Int'];
+  userId: Scalars['Int'];
 };
 
 export type User = {
@@ -150,7 +150,7 @@ export type AddDocumentMutationResult = Apollo.MutationResult<AddDocumentMutatio
 export type AddDocumentMutationOptions = Apollo.BaseMutationOptions<AddDocumentMutation, AddDocumentMutationVariables>;
 export const GetDocumentsDocument = gql`
     query GetDocuments($userId: Int!) {
-  getDocuments(id: $userId) {
+  getDocuments(userId: $userId) {
     id
   }
 }

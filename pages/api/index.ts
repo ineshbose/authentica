@@ -36,11 +36,11 @@ const Query = objectType({
     t.list.field('getDocuments', {
       type: 'Document',
       args: {
-        id: nonNull(intArg()),
+        userId: nonNull(intArg()),
       },
-      resolve: async (_, { id }) => {
+      resolve: async (_, { userId }) => {
         return prisma.document.findMany({
-          where: { userId: id },
+          where: { userId },
         });
       },
     });
