@@ -37,7 +37,7 @@ const Header: React.FC<unknown> = () => {
         .menu {
           position: fixed;
           top: 0;
-          height: var(--geist-page-nav-height);
+          height: 68px;
           width: 100%;
           backdrop-filter: saturate(180%) blur(5px);
           box-shadow: ${theme.type === 'dark'
@@ -65,7 +65,7 @@ const Header: React.FC<unknown> = () => {
           display: inline-flex;
           flex-direction: row;
           align-items: center;
-          font-size: 1.125rem;
+          font-size: 2rem;
           font-weight: 500;
           color: inherit;
           height: 28px;
