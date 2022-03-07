@@ -1,4 +1,4 @@
-mutation RemoveDocument($id: Int!, $userId: Int!) {
+mutation RemoveDocument($id: String!, $userId: Int!) {
     removeDocument(id: $id, userId: $userId) {
         id,
         userId

@@ -1,10 +1,11 @@
 import React from 'react';
 import NextLink from 'next/link';
 import { Button, useTheme } from '@geist-ui/core';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 const Header: React.FC<unknown> = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   return (
     <>
@@ -21,7 +22,7 @@ const Header: React.FC<unknown> = () => {
               <Button
                 auto
                 type="secondary"
-                onClick={() => Router.push('/dashboard')}
+                onClick={() => router.push('/dashboard')}
               >
                 Dashboard
               </Button>

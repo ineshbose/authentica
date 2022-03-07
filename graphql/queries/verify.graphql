@@ -1,0 +1,3 @@
+query Verify($pubKey: String!, $msgHash: String!) {
+    verify (pubKey: $pubKey, msgHash: $msgHash)
+}

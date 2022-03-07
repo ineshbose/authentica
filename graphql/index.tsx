@@ -31,6 +31,7 @@ export type Mutation = {
 
 
 export type MutationAddDocumentArgs = {
+  name: Scalars['String'];
   userId: Scalars['Int'];
 };
 
@@ -48,7 +49,7 @@ export type MutationRegisterArgs = {
 
 
 export type MutationRemoveDocumentArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
   userId: Scalars['Int'];
 };
 
@@ -56,11 +57,18 @@ export type Query = {
   __typename?: 'Query';
   getDocuments?: Maybe<Array<Maybe<Document>>>;
   hello?: Maybe<Scalars['String']>;
+  verify?: Maybe<Scalars['Boolean']>;
 };
 
 
 export type QueryGetDocumentsArgs = {
   userId: Scalars['Int'];
+};
+
+
+export type QueryVerifyArgs = {
+  msgHash: Scalars['String'];
+  pubKey: Scalars['String'];
 };
 
 export type User = {
@@ -72,6 +80,7 @@ export type User = {
 
 export type AddDocumentMutationVariables = Exact<{
   userId: Scalars['Int'];
+  name: Scalars['String'];
 }>;
 
 
@@ -106,17 +115,25 @@ export type RegisterMutationVariables = Exact<{
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
 
 export type RemoveDocumentMutationVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars['String'];
   userId: Scalars['Int'];
 }>;
 
 
 export type RemoveDocumentMutation = { __typename?: 'Mutation', removeDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
 
+export type VerifyQueryVariables = Exact<{
+  pubKey: Scalars['String'];
+  msgHash: Scalars['String'];
+}>;
+
+
+export type VerifyQuery = { __typename?: 'Query', verify?: boolean | null };
+
 
 export const AddDocumentDocument = gql`
-    mutation AddDocument($userId: Int!) {
-  addDocument(userId: $userId) {
+    mutation AddDocument($userId: Int!, $name: String!) {
+  addDocument(userId: $userId, name: $name) {
     id
     userId
   }
@@ -138,6 +155,7 @@ export type AddDocumentMutationFn = Apollo.MutationFunction<AddDocumentMutation,
  * const [addDocumentMutation, { data, loading, error }] = useAddDocumentMutation({
  *   variables: {
  *      userId: // value for 'userId'
+ *      name: // value for 'name'
  *   },
  * });
  */
@@ -286,7 +304,7 @@ export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const RemoveDocumentDocument = gql`
-    mutation RemoveDocument($id: Int!, $userId: Int!) {
+    mutation RemoveDocument($id: String!, $userId: Int!) {
   removeDocument(id: $id, userId: $userId) {
     id
     userId
@@ -320,3 +338,37 @@ export function useRemoveDocumentMutation(baseOptions?: Apollo.MutationHookOptio
 export type RemoveDocumentMutationHookResult = ReturnType<typeof useRemoveDocumentMutation>;
 export type RemoveDocumentMutationResult = Apollo.MutationResult<RemoveDocumentMutation>;
 export type RemoveDocumentMutationOptions = Apollo.BaseMutationOptions<RemoveDocumentMutation, RemoveDocumentMutationVariables>;
+export const VerifyDocument = gql`
+    query Verify($pubKey: String!, $msgHash: String!) {
+  verify(pubKey: $pubKey, msgHash: $msgHash)
+}
+    `;
+
+/**
+ * __useVerifyQuery__
+ *
+ * To run a query within a React component, call `useVerifyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useVerifyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useVerifyQuery({
+ *   variables: {
+ *      pubKey: // value for 'pubKey'
+ *      msgHash: // value for 'msgHash'
+ *   },
+ * });
+ */
+export function useVerifyQuery(baseOptions: Apollo.QueryHookOptions<VerifyQuery, VerifyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<VerifyQuery, VerifyQueryVariables>(VerifyDocument, options);
+      }
+export function useVerifyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<VerifyQuery, VerifyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<VerifyQuery, VerifyQueryVariables>(VerifyDocument, options);
+        }
+export type VerifyQueryHookResult = ReturnType<typeof useVerifyQuery>;
+export type VerifyLazyQueryHookResult = ReturnType<typeof useVerifyLazyQuery>;
+export type VerifyQueryResult = Apollo.QueryResult<VerifyQuery, VerifyQueryVariables>;

@@ -1,8 +1,10 @@
 import { Button, Grid, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
   return (
     <div
       style={{
@@ -22,10 +24,10 @@ const Home: NextPage = () => {
       </p>
       <Spacer h={1}></Spacer>
       <Grid.Container gap={1.5} justify="center">
-        <Button auto type="secondary" onClick={() => Router.push('/dashboard')}>
+        <Button auto type="secondary" onClick={() => router.push('/dashboard')}>
           Get Started
         </Button>
-        <Button auto onClick={() => Router.push('/tutorial')}>
+        <Button auto onClick={() => router.push('/tutorial')}>
           How does it work?
         </Button>
       </Grid.Container>

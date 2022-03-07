@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Input, Modal, Spacer } from '@geist-ui/core';
 import { FilePlus, FileText } from '@geist-ui/icons';
 import { NextPage } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import useAppContext from '../lib/AppContext';
 
 const Home: NextPage = () => {
@@ -11,12 +11,11 @@ const Home: NextPage = () => {
     user,
     // helpers: { getDocuments },
   } = useAppContext();
+  const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      Router.push('/login');
-    }
-  }, [user]);
+  if (!user) {
+    router.push('/login');
+  }
 
   return (
     <div

@@ -65,6 +65,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getDocuments: Array<NexusGenRootTypes['Document'] | null> | null; // [Document]
     hello: string | null; // String
+    verify: boolean | null; // Boolean
   }
   User: { // field return type
     email: string | null; // String
@@ -87,6 +88,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getDocuments: 'Document'
     hello: 'String'
+    verify: 'Boolean'
   }
   User: { // field return type name
     email: 'String'
@@ -98,6 +100,7 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     addDocument: { // args
+      name: string; // String!
       userId: number; // Int!
     }
     login: { // args
@@ -109,13 +112,17 @@ export interface NexusGenArgTypes {
       password: string; // String!
     }
     removeDocument: { // args
-      id: number; // Int!
+      id: string; // String!
       userId: number; // Int!
     }
   }
   Query: {
     getDocuments: { // args
       userId: number; // Int!
+    }
+    verify: { // args
+      msgHash: string; // String!
+      pubKey: string; // String!
     }
   }
 }

@@ -18,13 +18,13 @@ type ModelType<T = Omit<User, 'password'>> = Partial<{
 
 type AppContextType = {
   user?: ModelType | null;
-  documents: any[];
+  documents: ModelType<Document>[];
   helpers: {
     login: (d: AuthData) => Promise<any | FormError>;
     register: (d: AuthData) => Promise<any | FormError>;
     logout: () => void;
-    addDocument: () => void;
-    removeDocument: (d: number) => void;
+    addDocument: (n: string) => void;
+    removeDocument: (d: string) => void;
     getDocuments: (d: number) => Promise<any | FormError>;
   };
 };
@@ -54,18 +54,18 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => setUser(undefined);
 
-  const addDocument = async () => {
+  const addDocument = async (name: string) => {
     const userId = user?.id;
 
     if (userId) {
-      const response = await _docAdd({ variables: { userId } });
+      const response = await _docAdd({ variables: { userId, name } });
       if (response.data && response.data.addDocument) {
         setDocuments(documents.concat(response.data.addDocument));
       }
     }
   };
 
-  const removeDocument = async (docId: number) => {
+  const removeDocument = async (docId: string) => {
     const userId = user?.id;
     if (docId && userId) {
       const response = await _docRemove({ variables: { id: docId, userId } });

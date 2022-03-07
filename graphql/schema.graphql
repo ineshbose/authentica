@@ -8,15 +8,16 @@ type Document {
 }
 
 type Mutation {
-  addDocument(userId: Int!): Document
+  addDocument(name: String!, userId: Int!): Document
   login(email: String!, password: String!): User
   register(email: String!, password: String!): User
-  removeDocument(id: Int!, userId: Int!): Document
+  removeDocument(id: String!, userId: Int!): Document
 }
 
 type Query {
   getDocuments(userId: Int!): [Document]
   hello: String
+  verify(msgHash: String!, pubKey: String!): Boolean
 }
 
 type User {

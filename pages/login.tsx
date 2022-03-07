@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import useAppContext from '../lib/AppContext';
 
 const Login: NextPage = () => {
@@ -11,12 +11,11 @@ const Login: NextPage = () => {
     user,
     helpers: { login },
   } = useAppContext();
+  const router = useRouter();
 
-  useEffect(() => {
-    if (user) {
-      Router.push('/dashboard');
-    }
-  }, [user]);
+  if (user) {
+    router.push('/dashboard');
+  }
 
   return (
     <div
