@@ -22,7 +22,8 @@
   },
   "include": [
     "**/*.d.ts",
-    "next.config.mjs",
+    "**/*.config.mjs",
+    "**/*.config.js",
     "**/*.ts",
     "**/*.tsx"
   ],

@@ -1,95 +1,70 @@
 import React from 'react';
-import NextLink from 'next/link';
-import { Button, useTheme } from '@geist-ui/core';
+import { Button } from '@geist-ui/core';
 import { useRouter } from 'next/router';
+import { PenTool } from '@geist-ui/icons';
 
 const Header: React.FC<unknown> = () => {
-  const theme = useTheme();
   const router = useRouter();
 
   return (
-    <>
-      <div className="menu-wrapper">
-        <nav className="menu">
-          <div className="content">
-            <div className="logo">
-              <NextLink href={`/`}>
-                <a aria-label="Go Home">Authentica</a>
-              </NextLink>
-            </div>
-
-            <div className="controls">
-              <Button
-                auto
-                type="secondary"
-                onClick={() => router.push('/dashboard')}
-              >
-                Dashboard
-              </Button>
-            </div>
+    <header
+      className="
+        fixed
+        w-full
+        z-30
+        transition
+        duration-300
+        ease-in-out
+        bg-geist-background
+        md:opacity-90
+        border-b border-accent2
+      "
+    >
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex-shrink-0">
+            <Button
+              type="abort"
+              icon={<PenTool />}
+              className="
+                inline-flex
+                cursor-pointer
+                items-center
+                justify-center
+                border border-transparent
+                rounded
+                leading-snug
+                transition
+                duration-150
+                ease-in-out
+                text-accent8
+              "
+              scale={2}
+              auto
+              onClick={() => router.push('/')}
+            >
+              Authentica
+            </Button>
           </div>
-        </nav>
-      </div>
 
-      <style jsx>{`
-        .menu-wrapper {
-          height: var(--geist-page-nav-height);
-        }
-        .menu {
-          position: fixed;
-          top: 0;
-          height: 68px;
-          width: 100%;
-          backdrop-filter: saturate(180%) blur(5px);
-          box-shadow: ${theme.type === 'dark'
-            ? '0 0 0 1px #333'
-            : '0 0 15px 0 rgba(0, 0, 0, 0.1)'};
-          z-index: 999;
-        }
-        nav .content {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: 1000px;
-          height: 100%;
-          margin: 0 auto;
-          user-select: none;
-          padding: 0 ${theme.layout.gap};
-        }
-        .logo {
-          flex: 1 1;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-        }
-        .logo a {
-          display: inline-flex;
-          flex-direction: row;
-          align-items: center;
-          font-size: 2rem;
-          font-weight: 500;
-          color: inherit;
-          height: 28px;
-        }
-        .logo :global(.image) {
-          border: 1px solid ${theme.palette.border};
-          border-radius: 2rem;
-        }
-        .controls {
-          flex: 1 1;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-        .controls :global(.menu-toggle) {
-          display: flex;
-          align-items: center;
-          min-width: 40px;
-          height: 40px;
-          padding: 0;
-        }
-      `}</style>
-    </>
+          {router.pathname !== '/dashboard' ? (
+            <Button
+              type="secondary"
+              onClick={() => router.push('/dashboard')}
+              auto
+            >
+              {' '}
+              Dashboard{' '}
+            </Button>
+          ) : (
+            <Button auto onClick={() => router.push('/logout')}>
+              {' '}
+              Logout{' '}
+            </Button>
+          )}
+        </div>
+      </div>
+    </header>
   );
 };
 

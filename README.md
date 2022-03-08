@@ -68,6 +68,7 @@ yarn dev
 * [`benawad/jwt-auth-example`](https://github.com/benawad/jwt-auth-example)
 * [`prisma/awesome-links`](https://github.com/prisma/awesome-links)
 * [`prisma/prisma-examples`](https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-nextjs)
+* [`sumitkolhe/krates`](https://github.com/sumitkolhe/krates)
 
 ## Developed With
 
@@ -75,6 +76,7 @@ yarn dev
 * [Prisma](https://www.prisma.io/)
 * [GraphQL](https://graphql.org/)
 * [Geist UI](https://geist-ui.dev/)
+* [TailwindCSS](https://tailwindcss.com/)
 
 ## Team Members
 

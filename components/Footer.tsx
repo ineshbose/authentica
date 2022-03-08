@@ -1,56 +1,41 @@
 import React from 'react';
-import Image from 'next/image';
-import { useTheme, Text, Link } from '@geist-ui/core';
+import { Github } from '@geist-ui/icons';
 
 const Footer: React.FC = () => {
-  const theme = useTheme();
-
   return (
-    <>
-      <footer>
-        <Text>
-          Powered by{' '}
-          <Link
-            href="https://vercel.com/"
+    <div className="w-full z-30 bg-accent1 border-t border-accent2">
+      <footer className="max-w-5xl mx-auto">
+        <div className="border-b border-accent2 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* <CommonTheme /> */}
+          </div>
+        </div>
+
+        <div
+          className="
+            flex flex-col
+            md:flex-row
+            justify-between
+            items-center
+            py-10
+            gap-4
+          "
+        >
+          <div className="text-accent6 text-sm text-center py-2">
+            Built with Geist. Powered by Vercel.
+          </div>
+
+          <a
+            href="https://github.com/ineshbose/authentica"
+            className="text-accent8 hover:text-accent4"
             target="_blank"
-            rel="noopener"
-            underline
+            rel="noreferrer"
           >
-            <Image
-              src="https://assets.vercel.com/image/upload/q_auto/front/favicon/vercel/180x180.png"
-              alt="Vercel Logo"
-              width={16}
-              height={16}
-            />
-            Vercel
-          </Link>
-        </Text>
-        <Text>
-          Made with{' '}
-          <Link
-            href="https://geist-ui.dev/"
-            target="_blank"
-            rel="noopener"
-            underline
-          >
-            <Image
-              src="https://geist-ui.dev/images/logo.png"
-              alt="Geist Logo"
-              width={16}
-              height={16}
-            />
-            Geist
-          </Link>
-        </Text>
+            <Github />
+          </a>
+        </div>
       </footer>
-      <style jsx>{`
-        footer {
-          border-top: 1px solid ${theme.palette.border};
-          padding: ${theme.layout.gapQuarter} ${theme.layout.gap};
-          text-align: center;
-        }
-      `}</style>
-    </>
+    </div>
   );
 };
 
