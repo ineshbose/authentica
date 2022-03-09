@@ -123,9 +123,9 @@ const Home: NextPage = () => {
                 Let&apos;s say we want to sign a document named named
                 hello-authentica.md. After successfully signing the document,
                 you receive DK1, document key 1. DK1 can now be used along with
-                document to verify your signature. NOTE: DK1 is not a
-                cryptographic key like the keys in PK1. It unique identifier
-                encrypted by the private key of PK1.
+                the document to verify your signature. NOTE: DK1 is not a
+                cryptographic key like the keys in PK1. It is a unique
+                identifier encrypted by the private key of PK1.
               </p>
             </Card>
             <div className="md:hidden"></div>
@@ -135,9 +135,9 @@ const Home: NextPage = () => {
               <p className="text-sm leading-snug tracking-wide">
                 If we want to verify someone else&apos;s signature. Then we use
                 DK1 which was shared with the digital document, and the public
-                public key of the user who shared the document, and try to
-                verify that PK1 (the private key of the user who shared the
-                document) was used to generate DK1.
+                key of the user who shared the document, and try to verify that
+                PK1 (the private key of the user who shared the document) was
+                used to generate DK1.
               </p>
             </Card>
             <div className="md:block"></div>
