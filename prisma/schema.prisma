@@ -4,12 +4,12 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:../db.sqlite3"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int     @default(autoincrement()) @id
-  email     String  @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   password  String
   pubkey    String
   privkey   String
@@ -17,8 +17,8 @@ model User {
 }
 
 model Document {
-  id        String  @id
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String @id
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   signature String
 }

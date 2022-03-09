@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input, Spacer } from '@geist-ui/core';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -15,9 +15,11 @@ const Register: NextPage = () => {
   } = useAppContext();
   const router = useRouter();
 
-  if (user) {
-    router.push('/dashboard');
-  }
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  }, [user, router]);
 
   return (
     <div className="pt-24 text-center">

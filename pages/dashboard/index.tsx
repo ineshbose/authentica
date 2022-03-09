@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Fieldset, Input, Modal, Snippet } from '@geist-ui/core';
 import { Coffee, FilePlus, FileText, Trash } from '@geist-ui/icons';
 import { NextPage } from 'next';
@@ -18,9 +18,11 @@ const Dashboard: NextPage = () => {
   const [documentName, setDocumentName] = useState<string>();
   const router = useRouter();
 
-  if (!user) {
-    router.push('/login');
-  }
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   const createDocument = async () => {
     if (documentName) {
