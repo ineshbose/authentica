@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Document, PrismaClient } from '@prisma/client';
 
 declare global {
   namespace NodeJS {
@@ -9,3 +9,12 @@ declare global {
   // eslint-disable-next-line vars-on-top, no-var
   var prisma: PrismaClient;
 }
+
+type FrontendDocument = Omit<Document, 'signature'> & {
+  signature: {
+    r: string;
+    s: string;
+    recoveryParam: number;
+    name: string;
+  };
+};

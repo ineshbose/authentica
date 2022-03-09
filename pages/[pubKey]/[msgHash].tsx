@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useVerifyQuery } from '../../graphql';
 
@@ -24,7 +25,16 @@ const Verify: NextPage = () => {
         alignItems: 'center',
       }}
     >
-      <h1>{`${result}`}</h1>
+      <Image
+        alt={result ? 'Verified' : 'Invalid'}
+        width="100px"
+        height="20px"
+        src={
+          result
+            ? 'https://img.shields.io/badge/signature-verified-success'
+            : 'https://img.shields.io/badge/signature-invalid-critical'
+        }
+      />
     </div>
   );
 };

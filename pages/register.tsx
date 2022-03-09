@@ -60,21 +60,22 @@ const Register: NextPage = () => {
           }}
         />{' '}
         <Spacer h={1} />
+        <Button
+          auto
+          type="success"
+          onClick={() =>
+            register({
+              email,
+              password,
+            })
+          }
+        >
+          Register
+        </Button>
+        <p className="text-md mt-8">Already have an account?</p>
         <div className="flex flex-wrap justify-center">
           <Button auto type="warning" onClick={() => router.push('/login')}>
             Login
-          </Button>
-          <Button
-            auto
-            type="success"
-            onClick={() =>
-              register({
-                email,
-                password,
-              })
-            }
-          >
-            Submit
           </Button>
         </div>
       </div>

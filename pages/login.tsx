@@ -38,34 +38,31 @@ const Login: NextPage = () => {
         <Input
           value={email}
           placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={(e) => setEmail(e.target.value)}
         />{' '}
         <Spacer h={1} />
         <Input.Password
           value={password}
           placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={(e) => setPassword(e.target.value)}
         />{' '}
         <Spacer h={1} />
+        <Button
+          auto
+          type="success"
+          onClick={() =>
+            login({
+              email,
+              password,
+            })
+          }
+        >
+          Login
+        </Button>
+        <p className="text-md mt-8">Dont have an account?</p>
         <div className="flex flex-wrap justify-center">
           <Button auto type="warning" onClick={() => router.push('/register')}>
             Register
-          </Button>
-          <Button
-            auto
-            type="success"
-            onClick={() =>
-              login({
-                email,
-                password,
-              })
-            }
-          >
-            Submit
           </Button>
         </div>
       </div>

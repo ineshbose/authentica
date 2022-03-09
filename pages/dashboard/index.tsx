@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Fieldset, Input, Modal, Snippet } from '@geist-ui/core';
-import { Coffee, FilePlus, FileText } from '@geist-ui/icons';
+import { Coffee, FilePlus, FileText, Trash } from '@geist-ui/icons';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Document } from '@prisma/client';
@@ -9,13 +9,27 @@ import useAppContext from '../../lib/AppContext';
 const Dashboard: NextPage = () => {
   const [docModalVisible, setDocModalVisible] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedDoc, setSelectedDoc] = useState<Document>();
-  const { user, documents = [{ signature: 'hi' }] } = useAppContext();
+  const [selectedDoc, setSelectedDoc] = useState<Partial<Document>>();
+  const {
+    user,
+    documents,
+    helpers: { addDocument, removeDocument },
+  } = useAppContext();
+  const [documentName, setDocumentName] = useState<string>();
   const router = useRouter();
 
   if (!user) {
     router.push('/login');
   }
+
+  const createDocument = async () => {
+    if (documentName) {
+      await addDocument(documentName);
+      setDocModalVisible(false);
+    } else {
+      console.log('Enter name');
+    }
+  };
 
   return (
     <div className="pt-16">
@@ -36,20 +50,17 @@ const Dashboard: NextPage = () => {
             <Modal.Title>Sign document</Modal.Title>
             <Modal.Content>
               <Input
-                prefix-label="Document Name"
-                //   autofocus="true"
-                onChange={() => {}}
+                autoFocus
+                label="Document Name"
+                value={documentName}
+                onChange={(e) => setDocumentName(e.target.value)}
                 className="w-full mb-4"
-                //   type="inputError.name"
-                placeholder="
-                    inputError.name === 'danger' ? 'Name is required' : ''
-                  "
-              ></Input>
+              />
             </Modal.Content>
             <Modal.Action passive onClick={() => setDocModalVisible(false)}>
               Cancel
             </Modal.Action>
-            <Modal.Action>Submit</Modal.Action>
+            <Modal.Action onClick={createDocument}>Submit</Modal.Action>
           </Modal>
         </div>
       </div>
@@ -57,27 +68,43 @@ const Dashboard: NextPage = () => {
       <div className="max-w-5xl mx-auto px-4 my-12">
         {documents && documents.length > 0 ? (
           <div className="grid md:grid-cols-3 grid-cols-auto sm:grid-cols-2 gap-8 md:gap-10">
-            {documents.map((document) => (
-              <div
-                key={document.signature}
-                className="cursor-pointer"
-                onClick={() => setSelectedDoc(document as unknown as Document)}
-              >
-                <Fieldset className="text-accent8 hover:drop-shadow-xl">
-                  <span className="text-lg font-semibold">{`${document.signature?.slice(
-                    0,
-                    15
-                  )}${
-                    (document.signature || '').length > 15 ? '..' : ''
-                  }`}</span>
-                  <Snippet
-                    text={`https://authentica-io.vercel.app/${user?.pubkey}/${document.signature}/`}
-                    type="lite"
-                    width="60%"
-                  ></Snippet>
-                </Fieldset>
-              </div>
-            ))}
+            {documents
+              .map((document) => ({
+                ...document,
+                signature: JSON.parse(document.signature || '{}'),
+              }))
+              .map((document) => (
+                <div
+                  key={document.signature}
+                  className="cursor-pointer"
+                  onClick={() => setSelectedDoc(document as any)}
+                >
+                  <Fieldset className="text-accent8 hover:drop-shadow-xl">
+                    <span className="text-lg font-semibold">{`${document.signature.name?.slice(
+                      0,
+                      15
+                    )}${
+                      (document.signature.name || '').length > 15 ? '..' : ''
+                    }`}</span>
+                    <Snippet
+                      text={`https://authentica-io.vercel.app/${user?.pubkey}/${document.id}/`}
+                      type="lite"
+                      width="60%"
+                    />
+                    <Fieldset.Footer>
+                      <p className="h-6"></p>
+                      <span>
+                        <Button
+                          type="abort"
+                          auto
+                          icon={<Trash />}
+                          onClick={() => removeDocument(document.id || '')}
+                        ></Button>
+                      </span>
+                    </Fieldset.Footer>
+                  </Fieldset>
+                </div>
+              ))}
           </div>
         ) : (
           <div className="max-w-5xl mx-auto my-24">

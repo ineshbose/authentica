@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "yarn gen:graphql && yarn gen:prisma && yarn gen:nexus",
+    "gen": "yarn gen:prisma && yarn gen:nexus && yarn gen:graphql",
     "gen:graphql": "graphql-codegen --config codegen.yml",
     "gen:prisma": "prisma generate",
     "gen:nexus": "ts-node --transpile-only -P nexus.tsconfig.json pages/api",

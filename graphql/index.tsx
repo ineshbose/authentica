@@ -17,7 +17,8 @@ export type Scalars = {
 
 export type Document = {
   __typename?: 'Document';
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  signature?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['Int']>;
 };
 
@@ -76,6 +77,7 @@ export type User = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   password?: Maybe<Scalars['String']>;
+  pubkey?: Maybe<Scalars['String']>;
 };
 
 export type AddDocumentMutationVariables = Exact<{
@@ -84,14 +86,14 @@ export type AddDocumentMutationVariables = Exact<{
 }>;
 
 
-export type AddDocumentMutation = { __typename?: 'Mutation', addDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
+export type AddDocumentMutation = { __typename?: 'Mutation', addDocument?: { __typename?: 'Document', id?: string | null, userId?: number | null, signature?: string | null } | null };
 
 export type GetDocumentsQueryVariables = Exact<{
   userId: Scalars['Int'];
 }>;
 
 
-export type GetDocumentsQuery = { __typename?: 'Query', getDocuments?: Array<{ __typename?: 'Document', id?: number | null } | null> | null };
+export type GetDocumentsQuery = { __typename?: 'Query', getDocuments?: Array<{ __typename?: 'Document', id?: string | null, userId?: number | null, signature?: string | null } | null> | null };
 
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -104,7 +106,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'User', id?: number | null, email?: string | null, pubkey?: string | null } | null };
 
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
@@ -112,7 +114,7 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null } | null };
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'User', id?: number | null, email?: string | null, pubkey?: string | null } | null };
 
 export type RemoveDocumentMutationVariables = Exact<{
   id: Scalars['String'];
@@ -120,7 +122,7 @@ export type RemoveDocumentMutationVariables = Exact<{
 }>;
 
 
-export type RemoveDocumentMutation = { __typename?: 'Mutation', removeDocument?: { __typename?: 'Document', id?: number | null, userId?: number | null } | null };
+export type RemoveDocumentMutation = { __typename?: 'Mutation', removeDocument?: { __typename?: 'Document', id?: string | null, userId?: number | null } | null };
 
 export type VerifyQueryVariables = Exact<{
   pubKey: Scalars['String'];
@@ -136,6 +138,7 @@ export const AddDocumentDocument = gql`
   addDocument(userId: $userId, name: $name) {
     id
     userId
+    signature
   }
 }
     `;
@@ -170,6 +173,8 @@ export const GetDocumentsDocument = gql`
     query GetDocuments($userId: Int!) {
   getDocuments(userId: $userId) {
     id
+    userId
+    signature
   }
 }
     `;
@@ -238,6 +243,7 @@ export const LoginDocument = gql`
   login(email: $email, password: $password) {
     id
     email
+    pubkey
   }
 }
     `;
@@ -273,6 +279,7 @@ export const RegisterDocument = gql`
   register(email: $email, password: $password) {
     id
     email
+    pubkey
   }
 }
     `;

@@ -15,13 +15,15 @@ const User = objectType({
     t.int('id');
     t.string('email');
     t.string('password');
+    t.string('pubkey');
   },
 });
 const Document = objectType({
   name: 'Document',
   definition(t) {
-    t.int('id');
+    t.string('id');
     t.int('userId');
+    t.string('signature');
   },
 });
 

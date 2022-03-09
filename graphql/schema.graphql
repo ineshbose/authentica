@@ -3,7 +3,8 @@
 
 
 type Document {
-  id: Int
+  id: String
+  signature: String
   userId: Int
 }
 
@@ -24,4 +25,5 @@ type User {
   email: String
   id: Int
   password: String
+  pubkey: String
 }

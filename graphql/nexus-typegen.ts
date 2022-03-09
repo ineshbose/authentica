@@ -29,7 +29,8 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Document: { // root type
-    id?: number | null; // Int
+    id?: string | null; // String
+    signature?: string | null; // String
     userId?: number | null; // Int
   }
   Mutation: {};
@@ -38,6 +39,7 @@ export interface NexusGenObjects {
     email?: string | null; // String
     id?: number | null; // Int
     password?: string | null; // String
+    pubkey?: string | null; // String
   }
 }
 
@@ -53,7 +55,8 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Document: { // field return type
-    id: number | null; // Int
+    id: string | null; // String
+    signature: string | null; // String
     userId: number | null; // Int
   }
   Mutation: { // field return type
@@ -71,12 +74,14 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     id: number | null; // Int
     password: string | null; // String
+    pubkey: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Document: { // field return type name
-    id: 'Int'
+    id: 'String'
+    signature: 'String'
     userId: 'Int'
   }
   Mutation: { // field return type name
@@ -94,6 +99,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'Int'
     password: 'String'
+    pubkey: 'String'
   }
 }
 

@@ -1,5 +1,7 @@
 query GetDocuments($userId: Int!) {
     getDocuments(userId: $userId) {
-        id
+        id,
+        userId,
+        signature,
     }
 }

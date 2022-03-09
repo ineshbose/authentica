@@ -1,6 +1,7 @@
 mutation AddDocument($userId: Int!, $name: String!) {
     addDocument(userId: $userId, name: $name) {
         id,
-        userId
+        userId,
+        signature,
     }
 }
