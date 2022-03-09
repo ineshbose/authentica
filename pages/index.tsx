@@ -80,14 +80,14 @@ const Home: NextPage = () => {
             <p className="text-lg sm:text-xl text-accent4">
               Typically, to sign a digital document, a digital signature is
               generated using a Handwriting Font, or with a picture of a
-              person&apos;s actual signature. Handwriting Fonts are incecure as
+              person&apos;s actual signature. Handwriting Fonts are insecure as
               they can easily be copied. Images of signatures are also
-              problamatic as it is easy to steal physical signature, once it has
-              been used as a digital signature.
+              problematic as it is easy to steal a physical signature, once it
+              has been used as a digital signature.
             </p>
             <p className="text-lg sm:text-xl text-accent4">
-              Authentica was made mitigate the risks of current digital signing
-              methods and allow for seamless signatures.
+              Authentica was made to mitigate the risks of current digital
+              methods and to allow for seamless signatures.
             </p>
             <p className="text-lg sm:text-xl text-accent4">
               Authentica does not allow you to communicate with other users
@@ -122,10 +122,10 @@ const Home: NextPage = () => {
               <p className="text-sm leading-snug tracking-wide">
                 Let&apos;s say we want to sign a document named named
                 hello-authentica.md. After successfully signing the document,
-                you receive DK1, document key 1. DK1 can now be along with the
-                document to verify your signature. NOTE: DK1 is not a
-                cryptographic key like the keys in PK1. It unique identifier
-                encrypted by the private key of PK1.
+                you receive DK1, document key 1. DK1 can now be used along with
+                the document to verify your signature. NOTE: DK1 is not a
+                cryptographic key like the keys in PK1. It is a unique
+                identifier encrypted by the private key of PK1.
               </p>
             </Card>
             <div className="md:hidden"></div>
@@ -133,11 +133,11 @@ const Home: NextPage = () => {
             <Card hoverable>
               <h3 className="mb-3 font-bold text-xl">Verify signature</h3>
               <p className="text-sm leading-snug tracking-wide">
-                If we want to verify someone else&apos;s signature. Then weDK1
-                which was shared with the digital document, and the public
-                public key of the user who shared the document, and try to
-                verify that PK1 (the private key of the user who shared the
-                document) was used to generate DK1.
+                If we want to verify someone else&apos;s signature. Then we use
+                DK1 which was shared with the digital document, and the public
+                key of the user who shared the document, and try to verify that
+                PK1 (the private key of the user who shared the document) was
+                used to generate DK1.
               </p>
             </Card>
             <div className="md:block"></div>
