@@ -58,6 +58,16 @@ const Dashboard: NextPage = () => {
                 onChange={(e) => setDocumentName(e.target.value)}
                 className="w-full mb-4"
               />
+              <Input
+                disabled
+                label="Current Time"
+                value={`${new Date().toLocaleString()}`}
+                className="w-full my-4"
+              />
+              <p className="text-sm text-gray-500">
+                It is recommended to use unique document names to help you
+                distinguish between them.
+              </p>
             </Modal.Content>
             <Modal.Action passive onClick={() => setDocModalVisible(false)}>
               Cancel

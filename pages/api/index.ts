@@ -120,7 +120,7 @@ const Mutation = objectType({
         const signature = signDoc(user?.privkey as string, name);
         const document = await prisma.document.create({
           data: {
-            id: hash(name),
+            id: hash(`${name}${new Date().toISOString()}`),
             userId,
             signature,
           },
