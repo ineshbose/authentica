@@ -58,12 +58,7 @@ const Query = objectType({
         if (document) {
           const { signature } = document;
           const { name, ...sign } = JSON.parse(signature);
-          try {
-            return verifyDoc(pubKey, msgHash, sign);
-          } catch (e) {
-            console.log(e);
-            return false;
-          }
+          return verifyDoc(pubKey, msgHash, sign);
         }
         return false;
       },
@@ -114,13 +109,14 @@ const Mutation = objectType({
         name: nonNull(stringArg()),
       },
       resolve: async (_, { userId, name }) => {
+        const signTime = new Date().toISOString();
         const user = await prisma.user.findUnique({
           where: { id: userId },
         });
-        const signature = signDoc(user?.privkey as string, name);
+        const signature = signDoc(user?.privkey as string, name, signTime);
         const document = await prisma.document.create({
           data: {
-            id: hash(`${name}${new Date().toISOString()}`),
+            id: hash(`${name}${signTime}`),
             userId,
             signature,
           },
@@ -144,15 +140,15 @@ const Mutation = objectType({
         id: nonNull(stringArg()),
         userId: nonNull(intArg()),
       },
-      resolve: async (_, { id, userId }) => {
-        await prisma.user.update({
-          where: { id: userId },
-          data: {
-            documents: {
-              deleteMany: [{ id }],
-            },
-          },
-        });
+      resolve: async (_, { id }) => {
+        // await prisma.user.update({
+        //   where: { id: userId },
+        //   data: {
+        //     documents: {
+        //       deleteMany: [{ id }],
+        //     },
+        //   },
+        // });
         return prisma.document.delete({
           where: { id },
         });

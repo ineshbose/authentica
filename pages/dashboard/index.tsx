@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Fieldset, Input, Modal, Snippet } from '@geist-ui/core';
+import {
+  Button,
+  Fieldset,
+  Input,
+  Modal,
+  Snippet,
+  Spacer,
+} from '@geist-ui/core';
 import { Coffee, FilePlus, FileText, Trash } from '@geist-ui/icons';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Document } from '@prisma/client';
+import Image from 'next/image';
 import useAppContext from '../../lib/AppContext';
 
 const Dashboard: NextPage = () => {
@@ -79,7 +87,7 @@ const Dashboard: NextPage = () => {
 
       <div className="max-w-5xl mx-auto px-4 my-12">
         {documents && documents.length > 0 ? (
-          <div className="grid md:grid-cols-3 grid-cols-auto sm:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid md:grid-cols-3 grid-cols-auto grid-cols-2 gap-8 md:gap-10">
             {documents
               .map((document) => ({
                 ...document,
@@ -98,13 +106,30 @@ const Dashboard: NextPage = () => {
                     )}${
                       (document.signature.name || '').length > 15 ? '..' : ''
                     }`}</span>
+                    <Spacer height={0.5} />
                     <Snippet
-                      text={`https://authentica-io.vercel.app/${user?.pubkey}/${document.id}/`}
+                      symbol=""
+                      copy="prevent"
+                      text={`${document.id}`}
+                      type="lite"
+                      width="60%"
+                    />
+                    <Spacer height={0.5} />
+                    <Snippet
+                      symbol=""
+                      text={`https://img.shields.io/endpoint?url=https://authentica-io.vercel.app/api/${user?.pubkey}/${document.id}/`}
                       type="lite"
                       width="60%"
                     />
                     <Fieldset.Footer>
-                      <p className="h-6"></p>
+                      <p className="h-6">
+                        <Image
+                          alt="verification badge"
+                          width="100px"
+                          height="20px"
+                          src={`https://img.shields.io/endpoint?url=https://authentica-io.vercel.app/api/${user?.pubkey}/${document.id}/`}
+                        />
+                      </p>
                       <span>
                         <Button
                           type="abort"

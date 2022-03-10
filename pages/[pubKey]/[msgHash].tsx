@@ -1,17 +1,11 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useVerifyQuery } from '../../graphql';
-
-type URLQuery = {
-  pubKey: string;
-  msgHash: string;
-};
 
 const Verify: NextPage = () => {
   const router = useRouter();
-  const result = useVerifyQuery({ variables: router.query as URLQuery }).data
-    ?.verify;
+  const { pubKey, msgHash } = router.query;
+  // const result = useVerifyQuery({ variables: router.query as URLQuery }).data?.verify;
 
   return (
     <div
@@ -26,15 +20,25 @@ const Verify: NextPage = () => {
       }}
     >
       <Image
-        alt={result ? 'Verified' : 'Invalid'}
+        alt="verification badge"
         width="100px"
         height="20px"
-        src={
-          result
-            ? 'https://img.shields.io/badge/signature-verified-success'
-            : 'https://img.shields.io/badge/signature-invalid-critical'
-        }
+        src={`https://img.shields.io/endpoint?url=https://authentica-io.vercel.app/api/${pubKey}/${msgHash}/`}
       />
+      {/* {result === undefined ? (
+        <h3>Loading..</h3>
+      ) : (
+        <Image
+          alt={result ? 'Verified' : 'Invalid'}
+          width="100px"
+          height="20px"
+          src={
+            result
+              ? 'https://img.shields.io/badge/signature-verified-success'
+              : 'https://img.shields.io/badge/signature-invalid-critical'
+          }
+        />
+      )} */}
     </div>
   );
 };

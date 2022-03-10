@@ -1,11 +1,11 @@
-import { useContext, createContext, useState, ReactNode } from 'react';
+import React, { useContext, createContext, useState, ReactNode } from 'react';
 import { Document, User } from '@prisma/client';
 import {
   useLoginMutation,
   useRegisterMutation,
   useAddDocumentMutation,
   useRemoveDocumentMutation,
-  useGetDocumentsQuery,
+  useGetDocumentsLazyQuery,
 } from '../graphql';
 
 type AuthData = { email: string; password: string };
@@ -37,13 +37,15 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [_register] = useRegisterMutation();
   const [_docAdd] = useAddDocumentMutation();
   const [_docRemove] = useRemoveDocumentMutation();
-  const getDoc = useGetDocumentsQuery;
-  const userId = user?.id;
+  const [_getDoc] = useGetDocumentsLazyQuery();
 
-  const getDocuments = () => {
+  const getDocuments = async (forUser?: ModelType | null) => {
+    const userId = forUser?.id || user?.id;
     if (userId && !documents) {
-      const response = getDoc({ variables: { userId } });
+      const response = await _getDoc({ variables: { userId } });
+      console.log(response.data);
       if (response.data && response.data.getDocuments) {
+        console.log(response.data);
         setDocuments(response.data.getDocuments.filter((d) => d) as Document[]);
       }
     }
@@ -52,7 +54,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const login = async (variables: AuthData) => {
     const response = await _login({ variables });
     setUser(response.data?.login);
-    getDocuments();
+    getDocuments(response.data?.login);
     return !user ? 'Invalid credentials!' : 'success';
   };
 
@@ -66,6 +68,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => setUser(undefined);
 
   const addDocument = async (name: string) => {
+    const userId = user?.id;
+
     if (userId) {
       const response = await _docAdd({ variables: { userId, name } });
       if (response.data && response.data.addDocument) {
@@ -75,6 +79,8 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeDocument = async (docId: string) => {
+    const userId = user?.id;
+
     if (docId && userId) {
       const response = await _docRemove({ variables: { id: docId, userId } });
       if (response.data && response.data.removeDocument) {

@@ -14,11 +14,16 @@ export const getKeyPair = () => {
 
 export const hash = (msg: string) => sha3.keccak256(msg);
 
-export const signDoc = (privKey: string, name: string) =>
+export const signDoc = (privKey: string, name: string, time: string) =>
   JSON.stringify({
-    ...ec.sign(sha3.keccak256(name), privKey as unknown as Buffer, 'hex', {
-      canonical: true,
-    }),
+    ...ec.sign(
+      sha3.keccak256(`${name}${time}`),
+      privKey as unknown as Buffer,
+      'hex',
+      {
+        canonical: true,
+      }
+    ),
     name,
   });
 
@@ -27,6 +32,10 @@ export const verifyDoc = (
   msgHash: string,
   signature: elliptic.ec.Signature
 ) => {
-  console.log(signature);
-  return ec.verify(msgHash, signature, pubKey as unknown as Buffer, 'hex');
+  try {
+    return ec.verify(msgHash, signature, pubKey as unknown as Buffer, 'hex');
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
