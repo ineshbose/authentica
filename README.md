@@ -1,4 +1,9 @@
-# Authentica
+<div align="center">
+    <p align="center">
+        <img alt="Authentica logo" src="public/logo.svg" height="250px">
+        <h3 align="center">Authentica</h3>
+    </p>
+</div>
 
 Authentica is a service that allows signing online public documents using a key system and [Shields.io](https://shields.io). This project was created for the Human Centred Security (M) coursework.
 
